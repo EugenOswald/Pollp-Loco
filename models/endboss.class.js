@@ -37,9 +37,14 @@ class Endboss extends MovableObject {
     ];
 
 
+
+
     constructor() {
         super().loadImage(this.IMAGES_ALERTA[0]);
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_ALERTA);
+        this.loadImages(this.IMAGES_ATTACK);
+        this.loadImages(this.IMAGES_HURT);
         this.x = 2500; // Math.random() generiert nur eine zahl zwischen 0 - 1  z.B. 0,45
 
         this.speed = 1;
@@ -51,7 +56,7 @@ class Endboss extends MovableObject {
         setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
-
+        
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);;
         }, 100)
