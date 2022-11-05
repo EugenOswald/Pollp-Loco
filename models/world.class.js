@@ -47,10 +47,13 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.healthBar.setPercentage(this.character.energy);
-            }
+           if (this.character.isAboveGround() && this.character.isColliding(enemy)) {
+              // Kill Chicken Animation
+            } else
+                if (this.character.isColliding(enemy)) {
+                    this.character.hit();
+                    this.healthBar.setPercentage(this.character.energy);
+                }
         });
     }
 

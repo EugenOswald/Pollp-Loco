@@ -5,6 +5,12 @@ class MovableObject extends DrawableObject {
     acceleration = 2;
     lastHit = 0;
     energy = 100;
+    offset = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+    };
 
     hit() {
         this.energy -= 5;
@@ -44,11 +50,11 @@ class MovableObject extends DrawableObject {
 
 
     // character.isColliding(chicken)
-    isColliding(obj) {
-        return  this.x + this.width - this.offset.right > obj.x + obj.offset.left && // R => L
-            this.y + this.height - this.offset.bottom > obj.y + obj.offset.top && // T => B
-            this.x + this.offset.left < obj.x + obj.width - obj.offset.right && // L => R
-            this.y + this.offset.top < obj.y + obj.height - obj.offset.botoom; // B => T
+    isColliding(mo) {
+        return  this.x + this.width - this.offset.right > mo.x + mo.offset.left && // R => L
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && // T => B
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right && // L => R
+            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom; // B => T
     }
 
     moveRight() {
