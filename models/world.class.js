@@ -10,6 +10,8 @@ class World {
     bottleBar = new BottleBar();
     coinBar = new CoinBar();
     throwableObjects = [];
+    collectedBottles = [];
+    collectedCoins = [];
     background_sound = new Audio('audio/music.mp3');
 
 

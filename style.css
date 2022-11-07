@@ -23,6 +23,8 @@ h1 {
 
 canvas {
   background-color: black;
+  -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
 .d-none {
@@ -38,9 +40,11 @@ canvas {
   background-image: url("img/9_intro_outro_screens/start/startscreen_1.png");
   width: 720px;
   height: 420px;
+  -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
-.btn-style{
+.btn-style {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,4 +59,6 @@ canvas {
   cursor: pointer;
 }
 
-
+.btn-style:hover{
+  font-size: 34px;
+}
