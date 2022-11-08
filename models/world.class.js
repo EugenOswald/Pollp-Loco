@@ -48,41 +48,51 @@ class World {
     }
 
     checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
-           if (this.character.isAboveGround() && this.character.isColliding(enemy)) {
-              // Kill Chicken Animation
-            } else
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.healthBar.setPercentage(this.character.energy);
-                }
-        });
+        setInterval(() => {
+            this.level.enemies.forEach((enemy, indexEnemy) => {
+                if (this.character.isAboveGround() && this.character.isColliding(enemy)) {
+                    this.killingHeadJump(indexEnemy);        
+                    this.level.enemies[indexEnemy].energy = 0;
+                } else
+                    if (this.character.isColliding(enemy) && this.level.enemies[indexEnemy].energy > 0) {
+                        this.character.hit();
+                        this.healthBar.setPercentage(this.character.energy);
+                    }
+            });
+        }, 200);
     }
 
+    killingHeadJump(indexEnemy){
+        if (this.level.enemies[indexEnemy].energy > 1) {
+            this.character.headJump();
+        } 
+    }
+
+ 
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        // wird benötigen das um Canvas zu clearn das wird es neu Updaten können.
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            // wird benötigen das um Canvas zu clearn das wird es neu Updaten können.
 
-        this.ctx.translate(this.camera_x, 0);// Unser gesamter Ausschnitt wird um -100 verschoben   -- translate verschiebt alles um eine gewisse Variabele
+            this.ctx.translate(this.camera_x, 0);// Unser gesamter Ausschnitt wird um -100 verschoben   -- translate verschiebt alles um eine gewisse Variabele
 
-        this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.throwableObjects);
-        this.addToMap(this.character);
-        this.ctx.translate(-this.camera_x, 0); // das Minus bei this steht fürs gegenteil
-        this.addToMap(this.healthBar);
-        this.addToMap(this.bottleBar);
-        this.addToMap(this.coinBar);
-        // draw() wird immer wierder aufgerufen
-        //die function draw() wird sehr oft in einem Spiel ausgeführt, wenn man draw() alleine einfügen würde ->
-        // Würde es das System Crashen lassen,deswegen benutzt man requestAnimationFrame(function siehe funtcion unten) 
-        let self = this;
-        requestAnimationFrame(function () { // Die function wird ausgeführt wenn alles überder function gezeichnet wurde.
-            // Die function wird etwas async (etwas später) ausgeführt.
-            self.draw();                // Wenn man sowas hat kennt die function this. nicht mehr. Deshalb let self = this
-        });
+            this.addObjectsToMap(this.level.backgroundObjects);
+            this.addObjectsToMap(this.level.clouds);
+            this.addObjectsToMap(this.level.coins);
+            this.addObjectsToMap(this.level.enemies);
+            this.addObjectsToMap(this.throwableObjects);
+            this.addToMap(this.character);
+            this.ctx.translate(-this.camera_x, 0); // das Minus bei this steht fürs gegenteil
+            this.addToMap(this.healthBar);
+            this.addToMap(this.bottleBar);
+            this.addToMap(this.coinBar);
+            // draw() wird immer wierder aufgerufen
+            //die function draw() wird sehr oft in einem Spiel ausgeführt, wenn man draw() alleine einfügen würde ->
+            // Würde es das System Crashen lassen,deswegen benutzt man requestAnimationFrame(function siehe funtcion unten) 
+            let self = this;
+            requestAnimationFrame(function() { // Die function wird ausgeführt wenn alles überder function gezeichnet wurde.
+                // Die function wird etwas async (etwas später) ausgeführt.
+                self.draw();                // Wenn man sowas hat kennt die function this. nicht mehr. Deshalb let self = this
+            });
     }
 
 

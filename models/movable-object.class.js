@@ -13,13 +13,17 @@ class MovableObject extends DrawableObject {
     };
 
     hit() {
-        this.energy -= 5;
+        this.energy -= 1;
         if (this.energy < 0) {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime(); // Letzter Zeitpunkt mit 0Hp wird gespeichert 
         }
     }
+
+    headJump() {
+        this.speedY = 10;
+      }
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
@@ -59,6 +63,7 @@ class MovableObject extends DrawableObject {
 
     moveRight() {
         this.x += this.speed;
+        this.otherDirection = false;
     }
 
     moveLeft() {

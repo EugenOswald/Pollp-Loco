@@ -82,9 +82,11 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_WAITING);
         this.animate();
         this.applyGravaity();
+        this.pepeStandingStill();
+        this.pepeMovement();
     }
 
-    animate() {
+    pepeMovement() {
 
         setInterval(() => {
             this.walking_sound.pause()
@@ -110,22 +112,48 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100; // Es wird ein Minus benötigt sonst würde sich die Kamera ins gegenteil bewegen
         }, 1000 / 60);
 
+    }
+
+    animate() {
+
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            } if (this.isAboveGround()) {
+            } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-
+            } else if
+                (this.leftRightMoving()) {
+                this.playAnimation(this.IMAGES_WALKING);
             } else {
-
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.IMAGES_WALKING);
-                };
-
+                this.pepeSleepingWaitingAnimations();
             }
+
+
         }, 100)
+    }
+
+
+    pepeSleepingWaitingAnimations() {
+        this.inactivePepe = new Date().getTime() - this.lastPepeAction;
+        if (this.inactivePepe > 2000) {
+            this.playAnimation(this.IMAGES_SLEEPING);
+        } else {
+            this.playAnimation(this.IMAGES_WAITING);
+        }
+    }
+
+    pepeStandingStill() {
+        setInterval(() => {
+            if (this.noInteractionsWithPepe()) {
+                this.lastPepeAction = new Date().getTime();
+            }
+        }, 100);
+    }
+
+    leftRightMoving() {
+        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT && !this.isAboveGround();
     }
 
     jump() {
@@ -144,4 +172,15 @@ class Character extends MovableObject {
         return this.world.keyboard.SPACE && !this.isAboveGround()
     }
 
+
+     noInteractionsWithPepe() {
+        return this.world.keyboard.RIGHT ||
+            this.world.keyboard.LEFT ||
+            this.world.keyboard.SPACE ||
+            this.world.keyboard.ENTER ||
+            this.isAboveGround() ||
+            this.isHurt() ||
+            this.isDead();
+    }
 }
+
