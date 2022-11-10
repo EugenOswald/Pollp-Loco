@@ -7,7 +7,7 @@ class HealthBar extends DrawableObject {
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png',
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png',
     ];
-
+    gameOver = new Audio('audio/game-over.mp3');
     percentage = 100;
 
     constructor() {
@@ -37,9 +37,11 @@ class HealthBar extends DrawableObject {
             return 3;
         } else if (this.percentage > 40) {
             return 2;
-        } else if (this.percentage > 20) {
+        } else if (this.percentage > 1) {
             return 1;
         } else {
+            // this.gameOver.play();
+            // gameOverScreen();
             return 0;
         }
     }

@@ -15,6 +15,16 @@ function init() {
     world = new World(canvas, keyboard);
 }
 
+function gameOverScreen(){
+    document.getElementById('canvas').classList.add('d-none');
+    document.getElementById('gameOverScreen').classList.remove('d-none');
+}
+
+function backToStartScreen(){
+    document.getElementById('startScreen').classList.remove('d-none');
+    document.getElementById('gameOverScreen').classList.add('d-none');
+}
+
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;

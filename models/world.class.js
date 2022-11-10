@@ -13,6 +13,9 @@ class World {
     collectedBottles = [];
     collectedCoins = [];
     background_sound = new Audio('audio/music.mp3');
+    coin_sound = new Audio('audio/coin.mp3');
+    gameSoundOn = true;
+
 
 
 
@@ -24,9 +27,38 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        this.collectObjects()
         // this.background_sound.play();
         // this.background_sound.volume = 0.03;
     }
+
+    collectObjects() {
+        setInterval(() => {
+            this.checkCollectCoin();
+            this.checkCollectBottle();
+        }, 100);
+    }
+
+    checkCollectCoin() {
+        this.level.coins.forEach((coin, indexCoins) => {
+            if (this.character.isColliding(coin)) {
+                this.coin_sound.play();
+                this.collectedCoins.push(coin);
+                this.level.coins.splice(indexCoins, 1);
+            }
+        });
+    }
+    
+    checkCollectBottle() {
+        this.level.bottles.forEach((bottle, indexBottles) => {
+            if (this.character.isColliding(bottle)) {
+                // this.bottle_sound.play();
+                this.collectedBottles.push(bottle);
+                this.level.bottles.splice(indexBottles, 1);
+            }
+        });
+    }
+
 
     setWorld() {
         this.character.world = this;
@@ -41,7 +73,7 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.ENTER) {
+        if (this.keyboard.ENTER && this.collectedBottles.length > 0) {
             let bottle = new ThrowableObjects(this.character.x + 10, this.character.y + 100);
             this.throwableObjects.push(bottle);
         }
@@ -50,8 +82,8 @@ class World {
     checkCollisions() {
         setInterval(() => {
             this.level.enemies.forEach((enemy, indexEnemy) => {
-                if (this.character.isAboveGround() && this.character.isColliding(enemy)) {
-                    this.killingHeadJump(indexEnemy);        
+                if (this.character.isAboveGround() && this.character.isColliding(enemy) && this.isNotEndboss(enemy, indexEnemy) && this.level.enemies[indexEnemy].energy > 1) {
+                    this.killingHeadJump(indexEnemy);
                     this.level.enemies[indexEnemy].energy = 0;
                 } else
                     if (this.character.isColliding(enemy) && this.level.enemies[indexEnemy].energy > 0) {
@@ -59,40 +91,51 @@ class World {
                         this.healthBar.setPercentage(this.character.energy);
                     }
             });
-        }, 200);
+        }, 50);
     }
 
-    killingHeadJump(indexEnemy){
+
+    isNotEndboss(enemy) {
+        if (enemy == this.level.enemies[6]) {
+            return false;
+        } else {
+
+            return true;
+        }
+    }
+
+    killingHeadJump(indexEnemy) {
         if (this.level.enemies[indexEnemy].energy > 1) {
             this.character.headJump();
-        } 
+        }
     }
 
- 
+
     draw() {
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            // wird benötigen das um Canvas zu clearn das wird es neu Updaten können.
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        // wird benötigen das um Canvas zu clearn das wird es neu Updaten können.
 
-            this.ctx.translate(this.camera_x, 0);// Unser gesamter Ausschnitt wird um -100 verschoben   -- translate verschiebt alles um eine gewisse Variabele
+        this.ctx.translate(this.camera_x, 0);// Unser gesamter Ausschnitt wird um -100 verschoben   -- translate verschiebt alles um eine gewisse Variabele
 
-            this.addObjectsToMap(this.level.backgroundObjects);
-            this.addObjectsToMap(this.level.clouds);
-            this.addObjectsToMap(this.level.coins);
-            this.addObjectsToMap(this.level.enemies);
-            this.addObjectsToMap(this.throwableObjects);
-            this.addToMap(this.character);
-            this.ctx.translate(-this.camera_x, 0); // das Minus bei this steht fürs gegenteil
-            this.addToMap(this.healthBar);
-            this.addToMap(this.bottleBar);
-            this.addToMap(this.coinBar);
-            // draw() wird immer wierder aufgerufen
-            //die function draw() wird sehr oft in einem Spiel ausgeführt, wenn man draw() alleine einfügen würde ->
-            // Würde es das System Crashen lassen,deswegen benutzt man requestAnimationFrame(function siehe funtcion unten) 
-            let self = this;
-            requestAnimationFrame(function() { // Die function wird ausgeführt wenn alles überder function gezeichnet wurde.
-                // Die function wird etwas async (etwas später) ausgeführt.
-                self.draw();                // Wenn man sowas hat kennt die function this. nicht mehr. Deshalb let self = this
-            });
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
+        this.addToMap(this.character);
+        this.ctx.translate(-this.camera_x, 0); // das Minus bei this steht fürs gegenteil
+        this.addToMap(this.healthBar);
+        this.addToMap(this.bottleBar);
+        this.addToMap(this.coinBar);
+        // draw() wird immer wierder aufgerufen
+        //die function draw() wird sehr oft in einem Spiel ausgeführt, wenn man draw() alleine einfügen würde ->
+        // Würde es das System Crashen lassen,deswegen benutzt man requestAnimationFrame(function siehe funtcion unten) 
+        let self = this;
+        requestAnimationFrame(function () { // Die function wird ausgeführt wenn alles überder function gezeichnet wurde.
+            // Die function wird etwas async (etwas später) ausgeführt.
+            self.draw();                // Wenn man sowas hat kennt die function this. nicht mehr. Deshalb let self = this
+        });
     }
 
 
@@ -128,4 +171,6 @@ class World {
         movableObject.x = movableObject.x * -1;
         this.ctx.restore();
     }
+
+
 }

@@ -21,13 +21,13 @@ class ThrowableObjects extends MovableObject {
         this.loadImages(this.BOTTLE_SPLASH);
         this.x = x;
         this.y = y;
-        this.height = 100;
-        this.width = 100;
+        this.height = 70;
+        this.width = 70;
         this.trow();
     }
 
     trow() {
-        if (this.world.bottlesCollected.length > 0) {
+        if (world.collectedBottles.length > 0) {
             setInterval(() => {
                 this.playAnimation(this.BOTTLE_ROTATION);
             }, 50);
@@ -36,6 +36,7 @@ class ThrowableObjects extends MovableObject {
             setInterval(() => {
                 this.x += 15;
             }, 1000 / 60);
+            world.collectedBottles.splice(0,1);
         }
     }
 }

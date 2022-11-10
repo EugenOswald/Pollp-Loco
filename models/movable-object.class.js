@@ -4,6 +4,7 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2;
     lastHit = 0;
+    reJump_sound = new Audio('audio/rejump.mp3');
     energy = 100;
     offset = {
         top: 0,
@@ -22,6 +23,7 @@ class MovableObject extends DrawableObject {
     }
 
     headJump() {
+        this.reJump_sound.play();
         this.speedY = 10;
       }
 
@@ -60,6 +62,7 @@ class MovableObject extends DrawableObject {
             this.x + this.offset.left < mo.x + mo.width - mo.offset.right && // L => R
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom; // B => T
     }
+    
 
     moveRight() {
         this.x += this.speed;

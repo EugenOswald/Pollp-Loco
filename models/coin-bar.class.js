@@ -1,5 +1,5 @@
 class CoinBar extends DrawableObject {
-    IMAGES_COIN = [
+    IMAGES_COIN_BAR = [
         'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/0.png',
         'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/20.png',
         'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/40.png',
@@ -8,40 +8,34 @@ class CoinBar extends DrawableObject {
         'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/100.png',
     ];
 
-    percentage = 100;
-
     constructor() {
-        super(); // Es wird super benötigt um alles vom übergeordnetem Ordner zu initalisieren
-        this.loadImages(this.IMAGES_COIN);
+        super().loadImage(this.IMAGES_COIN_BAR[0]); // Es wird super benötigt um alles vom übergeordnetem Ordner zu initalisieren
         this.x = 20;
         this.y = 50;
         this.width = 200;
         this.height = 60;
-        this.setPercentage(0);
+        this.setCoinbar()
     }
 
-    setPercentage(percentage) {
-        this.percentage = percentage; // => 0...5
-        let path = this.IMAGES_COIN[this.resolveImageIndex()];
-        this.img = this.imageCashe[path];
+    setCoinbar() {
+        setInterval(() => {
+
+
+            if (world.collectedCoins.length >= 10) {
+                this.loadImage(this.IMAGES_COIN_BAR[5])
+            } else if (world.collectedCoins.length >= 8) {
+                this.loadImage(this.IMAGES_COIN_BAR[4])
+            } else if (world.collectedCoins.length >= 6) {
+                this.loadImage(this.IMAGES_COIN_BAR[3])
+            } else if (world.collectedCoins.length >= 4) {
+                this.loadImage(this.IMAGES_COIN_BAR[2])
+            } else if (world.collectedCoins.length >= 2) {
+                this.loadImage(this.IMAGES_COIN_BAR[1])
+            } else {
+                this.loadImage(this.IMAGES_COIN_BAR[0])
+            }
+
+        }, 100);
 
     }
-
-    resolveImageIndex() {
-
-        if (this.percentage == 100) {
-            return 5;
-        } else if (this.percentage > 80) {
-            return 4;
-        } else if (this.percentage > 60) {
-            return 3;
-        } else if (this.percentage > 40) {
-            return 2;
-        } else if (this.percentage > 20) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
 }

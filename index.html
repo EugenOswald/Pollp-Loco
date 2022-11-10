@@ -21,6 +21,7 @@
     <script src="models/character.class.js"></script>
     <script src="models/chicken.class.js"></script>
     <script src="models/coin.class.js"></script>
+    <script src="models/bottle.class.js"></script>
     <script src="models/endboss.class.js"></script>
     <script src="models/backgournd-object.class.js"></script>
     <script src="models/level.class.js"></script>
@@ -35,6 +36,10 @@
         <button class="btn-style" onclick="startGame()">START GAME</button>
         <button class="btn-style">HOW TO PLAY</button>
         <button class="btn-style">EXAMPLE VIDEO</button>
+    </div>
+
+    <div class="game-over-screen d-none" id="gameOverScreen">
+        <button class="btn-style" onclick="backToStartScreen()">MAIN MENU</button>
     </div>
 
     <canvas id="canvas" class="d-none" width="720" height="480">
