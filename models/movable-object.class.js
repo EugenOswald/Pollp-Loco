@@ -22,6 +22,14 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    hitsBack(){
+        this.x -= 1;
+        if (this.world.character.y >=160) {
+            this.speedY = 20;
+        }
+        
+    }
+
     headJump() {
         this.reJump_sound.play();
         this.speedY = 10;
@@ -85,6 +93,8 @@ class MovableObject extends DrawableObject {
     jump() {
         this.speedY = 25;
     }
+
+ 
 
 
 }

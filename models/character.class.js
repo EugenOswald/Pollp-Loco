@@ -161,7 +161,7 @@ class Character extends MovableObject {
     }
 
     keyboardRight() {
-        return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
+        return this.world.keyboard.RIGHT && this.x < this.world.endboss.x;
     }
 
     keyboardLeft() {

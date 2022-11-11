@@ -21,7 +21,7 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {         // Alle Objekte einen Rand geben
-        if (this instanceof Character || this instanceof Chicken || this instanceof miniChicken || this instanceof Endboss || this instanceof Coin ||this instanceof Bottle) { // Nur diese angegebenen Classen erhalten einen boarder
+        if (this instanceof Character || this instanceof Chicken || this instanceof miniChicken || this instanceof Endboss || this instanceof Coin ||this instanceof Bottle || this instanceof ThrowableObjects) { // Nur diese angegebenen Classen erhalten einen boarder
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'blue';

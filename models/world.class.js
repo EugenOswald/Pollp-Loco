@@ -8,6 +8,8 @@ class World {
     camera_x = 0;
     healthBar = new HealthBar();
     bottleBar = new BottleBar();
+    endbossBar = new EndbossBar();
+    endbossBarHeart = new EndbossBarHeart();
     coinBar = new CoinBar();
     throwableObjects = [];
     collectedBottles = [];
@@ -28,8 +30,10 @@ class World {
         this.setWorld();
         this.run();
         this.collectObjects()
+        
         // this.background_sound.play();
         // this.background_sound.volume = 0.03;
+        // this.background_sound.loop = true;
     }
 
     collectObjects() {
@@ -48,7 +52,7 @@ class World {
             }
         });
     }
-    
+
     checkCollectBottle() {
         this.level.bottles.forEach((bottle, indexBottles) => {
             if (this.character.isColliding(bottle)) {
@@ -69,6 +73,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.checkCollistionThrowObject();
         }, 200);
     }
 
@@ -79,17 +84,30 @@ class World {
         }
     }
 
+    checkCollistionThrowObject(){
+        setInterval(() => {
+            this.level.enemies.forEach((enemy, indexEnemy) => {
+                if (this.throwableObjects.isColliding(enemy)) {
+                    this.level.enemies[indexEnemy].energy -= 1;
+                }
+            });
+        }, 50);
+    }
+
     checkCollisions() {
         setInterval(() => {
             this.level.enemies.forEach((enemy, indexEnemy) => {
                 if (this.character.isAboveGround() && this.character.isColliding(enemy) && this.isNotEndboss(enemy, indexEnemy) && this.level.enemies[indexEnemy].energy > 1) {
                     this.killingHeadJump(indexEnemy);
                     this.level.enemies[indexEnemy].energy = 0;
-                } else
-                    if (this.character.isColliding(enemy) && this.level.enemies[indexEnemy].energy > 0) {
-                        this.character.hit();
-                        this.healthBar.setPercentage(this.character.energy);
-                    }
+                } else if (this.character.isColliding(this.level.enemies[6]) && this.level.enemies[indexEnemy].energy > 0) {
+                    this.character.hitsBack()
+                    this.character.hit();
+                    this.healthBar.setPercentage(this.character.energy);
+                } else if (this.character.isColliding(enemy) && this.level.enemies[indexEnemy].energy > 0) {
+                    this.character.hit();
+                    this.healthBar.setPercentage(this.character.energy);
+                }
             });
         }, 50);
     }
@@ -126,6 +144,8 @@ class World {
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0); // das Minus bei this steht fürs gegenteil
         this.addToMap(this.healthBar);
+        this.addToMap(this.endbossBar);
+        this.addToMap(this.endbossBarHeart);
         this.addToMap(this.bottleBar);
         this.addToMap(this.coinBar);
         // draw() wird immer wierder aufgerufen

@@ -14,6 +14,12 @@ class ThrowableObjects extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ];
+    offset = {
+        top: 5,
+        bottom: 5,
+        left: 5,
+        right: 5,
+    };
 
     constructor(x, y) {
         super().loadImage(this.BOTTLE_ROTATION[0]);
@@ -34,9 +40,10 @@ class ThrowableObjects extends MovableObject {
             this.speedY = 20;
             this.applyGravaity();
             setInterval(() => {
-                this.x += 15;
+                this.x += 4;
             }, 1000 / 60);
             world.collectedBottles.splice(0,1);
         }
+        
     }
 }

@@ -8,7 +8,7 @@ class Chicken extends MovableObject {
         left: 5,
         right: 5,
     };
-    energy = 5;
+    energy = 1;
     chickenDead = false;
     CHICKEN_WALKING = [
         'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',

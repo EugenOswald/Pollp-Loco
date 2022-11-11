@@ -17,7 +17,7 @@ class Bottle extends MovableObject {
         super().loadImage(this.BOTTLE_IMAGE[0]);
         this.loadImages(this.BOTTLE_IMAGE);
         this.y = 360 ;
-        this.x = Math.random() * 7 * 600; // Math.random() generiert nur eine zahl zwischen 0 - 1  z.B. 0,45
+        this.x = Math.random() * 4 * 400; // Math.random() generiert nur eine zahl zwischen 0 - 1  z.B. 0,45
     }
 
 }

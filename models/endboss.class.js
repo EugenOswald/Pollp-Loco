@@ -2,6 +2,7 @@ class Endboss extends MovableObject {
     y = 60;
     width = 400;
     height = 400;
+    energy = 5;
     offset = {
         top: 70,
         bottom: 10,
@@ -51,30 +52,44 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ALERTA);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
-        this.x = 2500; // Math.random() generiert nur eine zahl zwischen 0 - 1  z.B. 0,45
-
-        this.speed = 1;
+        this.x = 2300; // Math.random() generiert nur eine zahl zwischen 0 - 1  z.B. 0,45
+        this.speed = 2;
         this.animate();
+        this.movement();
     }
 
 
     animate() {
 
-            setInterval(() => {
-                if (world.character.x > 2000) {
-                    setInterval(() => {
-                        this.playAnimation(this.IMAGES_WALKING);
-                        this.moveLeft();
-                    }, 250);
-                    
-                    
-                } else {
-                    this.playAnimation(this.IMAGES_ALERTA)
-                }
-                
-            }, 300);
-            
-            
-        
+        setInterval(() => {
+            if (world.endboss.x - world.character.x   <= 150) {
+                this.playAnimation(this.IMAGES_ATTACK);
+            } else 
+            if (this.checkDistancePepeEndboss() || this.checkIfEndbossMoved()) {
+                this.playAnimation(this.IMAGES_WALKING);
+                world.endbossBar.width = 250;
+                world.endbossBarHeart.width = 80;
+            } else {
+                this.playAnimation(this.IMAGES_ALERTA)
+            }
+        }, 300);
     }
+
+
+    movement() {
+        setInterval(() => {
+            if (this.checkDistancePepeEndboss() || this.checkIfEndbossMoved()) {
+                this.moveLeft();
+            }
+        }, 1000 / 60);
+    }
+
+    checkDistancePepeEndboss() {
+        return world.character.x > 1950;
+    }
+
+    checkIfEndbossMoved() {
+        return world.endboss.x < 2300
+    }
+
 }
