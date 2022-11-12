@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="img/7_statusbars/3_icons/icon_health_endboss.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="img/7_statusbars/3_icons/icon_health_endboss.png"
+    />
     <title>Pollo Loco</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="models/world.class.js"></script>
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
@@ -29,27 +32,21 @@
     <script src="models/level.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>El Pollo Loco</h1>
 
     <div class="start-screen" id="startScreen">
-        <button class="btn-style" onclick="startGame()">START GAME</button>
-        <button class="btn-style">HOW TO PLAY</button>
-        <button class="btn-style">EXAMPLE VIDEO</button>
+      <button class="btn-style" onclick="startGame()">START GAME</button>
+      <button class="btn-style">HOW TO PLAY</button>
+      <button class="btn-style">EXAMPLE VIDEO</button>
     </div>
 
     <div class="game-over-screen d-none" id="gameOverScreen">
-        <button class="btn-style" onclick="backToStartScreen()">MAIN MENU</button>
+      <button class="btn-style" onclick="backToStartScreen()">MAIN MENU</button>
     </div>
 
-    <canvas id="canvas" class="d-none" width="720" height="480">
-
-    </canvas>
-
-
-
-</body>
-
+    <canvas id="canvas" class="d-none" width="720" height="480"> </canvas>
+  </body>
 </html>

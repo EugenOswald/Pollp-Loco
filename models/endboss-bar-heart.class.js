@@ -1,19 +1,11 @@
 class EndbossBarHeart extends DrawableObject {
+  IMAGES_BOSSHEART = ["img/7_statusbars/3_icons/icon_health_endboss.png"];
 
-
-    IMAGES_BOSSHEART = ['img/7_statusbars/3_icons/icon_health_endboss.png']
-
-
-
-    constructor() {
-        super().loadImage(this.IMAGES_BOSSHEART[0]); // Es wird super benötigt um alles vom übergeordnetem Ordner zu initalisieren
-        this.x = 430;
-        this.y = 5;
-        this.width = 0;
-        this.height = 80;
-
-    }
-
-
-
+  constructor() {
+    super().loadImage(this.IMAGES_BOSSHEART[0]); // Es wird super benötigt um alles vom übergeordnetem Ordner zu initalisieren
+    this.x = 430;
+    this.y = 5;
+    this.width = 0;
+    this.height = 80;
+  }
 }
