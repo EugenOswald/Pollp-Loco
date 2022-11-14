@@ -20,6 +20,7 @@ class ThrowableObjects extends MovableObject {
     right: 5,
   };
 
+
   constructor(x, y) {
     super().loadImage(this.BOTTLE_ROTATION[0]);
     this.loadImages(this.BOTTLE_ROTATION);
@@ -35,7 +36,7 @@ class ThrowableObjects extends MovableObject {
     if (world.collectedBottles.length > 0) {
       setInterval(() => {
         this.playAnimation(this.BOTTLE_ROTATION);
-      }, 50);
+      }, 150);
       this.speedY = 20;
       this.applyGravaity();
       setInterval(() => {
@@ -46,6 +47,10 @@ class ThrowableObjects extends MovableObject {
   }
 
   splashAnimation() {
-    this.playAnimation(this.BOTTLE_SPLASH);
+      setInterval(() => {
+        this.playAnimation(this.BOTTLE_SPLASH);
+      }, 5);
+
+
   }
 }

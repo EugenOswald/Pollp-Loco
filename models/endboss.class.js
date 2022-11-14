@@ -2,7 +2,7 @@ class Endboss extends MovableObject {
   y = 60;
   width = 400;
   height = 400;
-  energy = 25;
+  energy = 100;
   offset = {
     top: 70,
     bottom: 10,
@@ -43,21 +43,32 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/4_hurt/G23.png",
   ];
 
+  ENDBOSS_DEAD = [
+    "img/4_enemie_boss_chicken/5_dead/G24.png",
+    "img/4_enemie_boss_chicken/5_dead/G25.png",
+    "img/4_enemie_boss_chicken/5_dead/G26.png",
+  ];
+  speed = 2;
   constructor() {
     super().loadImage(this.IMAGES_ALERTA[0]);
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_ALERTA);
     this.loadImages(this.IMAGES_ATTACK);
     this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.ENDBOSS_DEAD);
     this.x = 2300; // Math.random() generiert nur eine zahl zwischen 0 - 1  z.B. 0,45
-    this.speed = 2;
     this.animate();
     this.movement();
   }
 
   animate() {
     setInterval(() => {
-      if (world.endboss.x - world.character.x <= 150) {
+      if (this.energy <= 0) {
+        this.speed = 0;
+        this.playAnimation(this.ENDBOSS_DEAD);
+        // DEAD Sound
+        // Win Screen
+      } else if (world.endboss.x - world.character.x <= 150) {
         this.playAnimation(this.IMAGES_ATTACK);
       } else if (
         this.checkDistancePepeEndboss() ||
@@ -74,7 +85,7 @@ class Endboss extends MovableObject {
 
   movement() {
     setInterval(() => {
-      if (this.checkDistancePepeEndboss() || this.checkIfEndbossMoved()) {
+      if (this.checkDistancePepeEndboss() || this.checkIfEndbossMoved() && this.energy > 0) {
         this.moveLeft();
       }
     }, 1000 / 60);

@@ -8,11 +8,13 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0;
   font-family: "zabars", Arial, Helvetica, sans-serif;
   background-image: url("img/5_background/website_background.png");
   background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 h1 {
@@ -22,6 +24,7 @@ h1 {
 }
 
 canvas {
+  display: block;
   background-color: black;
   -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
@@ -59,11 +62,11 @@ canvas {
   cursor: pointer;
 }
 
-.btn-style:hover{
+.btn-style:hover {
   font-size: 34px;
 }
 
-.game-over-screen{
+.game-over-screen {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -74,4 +77,18 @@ canvas {
   height: 420px;
   -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* Smartphones ---------------------- */
+@media only screen and (max-width: 720px) {
+  .fullscreen {
+    width: 100%;
+  }
+}
+
+/* Smartphones ---------------------- */
+@media only screen and (max-height: 480px) {
+  .fullscreen {
+    height: 100vh;
+  }
 }

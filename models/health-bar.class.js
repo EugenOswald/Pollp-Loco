@@ -40,6 +40,7 @@ class HealthBar extends DrawableObject {
     } else {
       // this.gameOver.play();
       // gameOverScreen();
+      
       return 0;
     }
   }

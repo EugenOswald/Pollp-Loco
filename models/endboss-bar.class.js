@@ -24,15 +24,15 @@ class EndbossBar extends DrawableObject {
 
   setBottlebar() {
     setInterval(() => {
-      if (world.level.enemies[6].energy >= 25) {
+      if (world.level.enemies[6].energy >= 100) {
         this.loadImage(this.IMAGES_BOSSHEALTH[5]);
-      } else if (world.level.enemies[6].energy >= 20) {
+      } else if (world.level.enemies[6].energy >= 80) {
         this.loadImage(this.IMAGES_BOSSHEALTH[4]);
-      } else if (world.level.enemies[6].energy >= 15) {
+      } else if (world.level.enemies[6].energy >= 60) {
         this.loadImage(this.IMAGES_BOSSHEALTH[3]);
-      } else if (world.level.enemies[6].energy >= 10) {
+      } else if (world.level.enemies[6].energy >= 40) {
         this.loadImage(this.IMAGES_BOSSHEALTH[2]);
-      } else if (world.level.enemies[6].energy >= 5) {
+      } else if (world.level.enemies[6].energy >= 20) {
         this.loadImage(this.IMAGES_BOSSHEALTH[1]);
       } else {
         this.loadImage(this.IMAGES_BOSSHEALTH[0]);

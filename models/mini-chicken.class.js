@@ -1,5 +1,5 @@
 class miniChicken extends MovableObject {
-  y = 375;
+  y = 365;
   width = 50;
   height = 50;
   offset = {
@@ -8,7 +8,7 @@ class miniChicken extends MovableObject {
     left: 5,
     right: 5,
   };
-  energy = 5;
+  energy = 2;
   CHICKEN_SMALL_WALKING = [
     "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
     "img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
