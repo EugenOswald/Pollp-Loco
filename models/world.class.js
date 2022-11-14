@@ -14,7 +14,6 @@ class World {
 	throwableObjects = [];
 	collectedBottles = [];
 	collectedCoins = [];
-	splashBottles = [];
 	background_sound = new Audio("audio/music.mp3");
 	coin_sound = new Audio("audio/coin.mp3");
 	gameSoundOn = true;
@@ -41,7 +40,8 @@ class World {
 			this.checkCollectCoin();
 			this.checkCollectBottle();
 			this.checkCollisionThrowObject();
-		}, 150);
+			this.checkCollisions();
+		}, 50);
 	}
 
 	checkCollectCoin() {
@@ -70,9 +70,8 @@ class World {
 
 	run() {
 		setInterval(() => {
-			this.checkCollisions();
 			this.checkThrowObjects();
-		}, 50);
+		}, 100);
 	}
 
 	checkThrowObjects() {
