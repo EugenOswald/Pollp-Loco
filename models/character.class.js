@@ -91,20 +91,20 @@ class Character extends MovableObject {
          if (this.keyboardRight()) {
             this.moveRight();
             this.otherDirection = false;
-            this.walking_sound.play();
+            if (world.muted == false) {this.walking_sound.play()};
          }
 
          if (this.keyboardLeft()) {
             this.moveLeft();
             this.otherDirection = true;
-            this.walking_sound.play();
+            if (world.muted == false) {this.walking_sound.play()};
          }
 
          if (this.keyboardJump()) {
             // Es soll UP gedrückt werden und er soll nicht in der Luft sein
             this.walking_sound.pause();
-            this.jumping_sound.play();
-            this.jumping_sound.volume = 0.5;
+            if (world.muted == false) {this.jumping_sound.play();
+            this.jumping_sound.volume = 0.5;};
             this.jump(); // Geschwindichkeit des Jumps
          }
 

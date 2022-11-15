@@ -14,13 +14,13 @@ class World {
 	throwableObjects = [];
 	collectedBottles = [];
 	collectedCoins = [];
-	background_sound = new Audio("audio/music.mp3");
-	coin_sound = new Audio("audio/coin.mp3");
-	gameSoundOn = true;
-	broken_bottle_sound = new Audio("audio/broken-bottle.mp3");
+	muted = false;
 	collisionTimepassed;
 	lastCollision;
-
+	background_sound = new Audio("audio/music.mp3");
+	coin_sound = new Audio("audio/coin.mp3");
+	broken_bottle_sound = new Audio("audio/broken-bottle.mp3");
+	
 	constructor(canvas, keyboard) {
 		this.ctx = canvas.getContext("2d");
 		this.canvas = canvas;
@@ -29,10 +29,16 @@ class World {
 		this.setWorld();
 		this.run();
 		this.collectObjects();
+	}
 
-		// this.background_sound.play();
-		// this.background_sound.volume = 0.03;
-		// this.background_sound.loop = true;
+	isMuted() {
+		setInterval(() => {
+			if (keyboard.MUTE == false) {
+				this.muted = false;
+			} else if (keyboard.MUTE == true) {
+				this.muted = true;
+			}
+		}, 1000 / 60);
 	}
 
 	collectObjects() {
@@ -47,7 +53,10 @@ class World {
 	checkCollectCoin() {
 		this.level.coins.forEach((coin, indexCoins) => {
 			if (this.character.isColliding(coin)) {
-				this.coin_sound.play();
+				if (this.muted == false) {
+					this.coin_sound.play();
+					this.coin_sound.volume = 0.2;
+				}
 				this.collectedCoins.push(coin);
 				this.level.coins.splice(indexCoins, 1);
 			}
@@ -57,7 +66,7 @@ class World {
 	checkCollectBottle() {
 		this.level.bottles.forEach((bottle, indexBottles) => {
 			if (this.character.isColliding(bottle)) {
-				// this.bottle_sound.play();
+				//if (this.this.muted == false) {this.bottle_sound.play();}
 				this.collectedBottles.push(bottle);
 				this.level.bottles.splice(indexBottles, 1);
 			}
@@ -71,7 +80,18 @@ class World {
 	run() {
 		setInterval(() => {
 			this.checkThrowObjects();
+			this.isMuted();
+			this.backgroundMusic();
+			this.checkGameEnd();
 		}, 100);
+	}
+
+
+	backgroundMusic(){
+		if (this.muted == false) {
+			this.background_sound.play();
+			this.background_sound.volume = 0.03;
+		} else this.background_sound.pause();
 	}
 
 	checkThrowObjects() {
@@ -82,7 +102,6 @@ class World {
 	}
 
 	checkCollisionThrowObject() {
-		
 		this.level.enemies.forEach((enemy, indexEnemy) => {
 			this.throwableObjects.forEach((bottle, indexBottle) => {
 				if (this.throwableObjects[indexBottle].isColliding(enemy)) {
@@ -105,19 +124,21 @@ class World {
 
 	checkFirstCollision() {
 		let collisionTimepassed = new Date().getTime() - this.lastCollision;
-		return collisionTimepassed < 4000;
+		return collisionTimepassed < 1000;
 	}
 
 	brokenBottleSound() {
-			if (this.checkFirstCollision()) {
+		if (this.checkFirstCollision()) {
+			if (this.muted == false) {
 				this.broken_bottle_sound.play();
-				this.broken_bottle_sound.loop = false;
-				this.broken_bottle_sound.volume = 0.5;
-			} else {
+			}
+			this.broken_bottle_sound.loop = false;
+			this.broken_bottle_sound.volume = 0.5;
+		} else {
+			if (muted == false) {
 				this.broken_bottle_sound.pause();
 			}
-	
-		
+		}
 	}
 
 	checkCollisions() {
@@ -221,5 +242,15 @@ class World {
 	clearRect() {
 		let context = canvas.getContext("2d");
 		context.clearRect(0, 0, canvas.width, canvas.height);
+	}
+
+	checkGameEnd(){
+		setInterval(() => {
+			if (this.level.enemies[6].energy <= 0) {
+				
+			} else if (world.character.energy <= 0){
+				gameOverScreen();
+			}
+		}, 200);
 	}
 }

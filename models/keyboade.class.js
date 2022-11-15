@@ -5,4 +5,5 @@ class Keyboard extends MovableObject {
   DOWN = false;
   SPACE = false;
   ENTER = false;
+  MUTE = false;
 }
