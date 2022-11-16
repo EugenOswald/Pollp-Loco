@@ -20,7 +20,7 @@ class World {
 	background_sound = new Audio("audio/music.mp3");
 	coin_sound = new Audio("audio/coin.mp3");
 	broken_bottle_sound = new Audio("audio/broken-bottle.mp3");
-	
+
 	constructor(canvas, keyboard) {
 		this.ctx = canvas.getContext("2d");
 		this.canvas = canvas;
@@ -86,8 +86,7 @@ class World {
 		}, 100);
 	}
 
-
-	backgroundMusic(){
+	backgroundMusic() {
 		if (this.muted == false) {
 			this.background_sound.play();
 			this.background_sound.volume = 0.03;
@@ -244,11 +243,11 @@ class World {
 		context.clearRect(0, 0, canvas.width, canvas.height);
 	}
 
-	checkGameEnd(){
+	checkGameEnd() {
 		setInterval(() => {
 			if (this.level.enemies[6].energy <= 0) {
-				
-			} else if (world.character.energy <= 0){
+				gameWinnerScreen();
+			} else if (world.character.energy <= 0) {
 				gameOverScreen();
 			}
 		}, 200);

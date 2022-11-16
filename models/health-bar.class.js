@@ -17,7 +17,7 @@ class HealthBar extends DrawableObject {
     this.y = 0;
     this.width = 200;
     this.height = 60;
-    this.setPercentage(100);
+    this.setPercentage(500);
   }
 
   setPercentage(percentage) {
@@ -27,15 +27,15 @@ class HealthBar extends DrawableObject {
   }
 
   resolveImageIndex() {
-    if (this.percentage == 100) {
+    if (this.percentage == 500) {
       return 5;
-    } else if (this.percentage > 80) {
+    } else if (this.percentage > 400) {
       return 4;
-    } else if (this.percentage > 60) {
+    } else if (this.percentage > 300) {
       return 3;
-    } else if (this.percentage > 40) {
+    } else if (this.percentage > 200) {
       return 2;
-    } else if (this.percentage > 1) {
+    } else if (this.percentage > 100) {
       return 1;
     } else {
       // this.gameOver.play();

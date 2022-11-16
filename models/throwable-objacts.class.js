@@ -56,8 +56,6 @@ class ThrowableObjects extends MovableObject {
 		}
 	}
 
-  
-
 	splashAnimation() {
 		setInterval(() => {
 			this.playAnimation(this.BOTTLE_SPLASH);
