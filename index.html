@@ -8,8 +8,8 @@
   <link rel="icon" type="image/x-icon" href="img/7_statusbars/3_icons/icon_health_endboss.png" />
   <title>Pollo Loco</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/24e52bc054.js" crossorigin="anonymous"></script>
   <script src="models/world.class.js"></script>
-
   <script src="models/drawable-object.class.js"></script>
   <script src="models/movable-object.class.js"></script>
   <script src="models/keyboade.class.js"></script>
@@ -34,19 +34,40 @@
 
 <body>
   <h1>El Pollo Loco</h1>
+
   <div id="fullscreen" class="gameBoard">
-    <div>
-      <button onmousedown="simulateKeyPressed(32,'keydown')" onmouseup="simulateKeyPressed(32,'keyup')">l</button>
-      <button onmousedown="simulateKeyPressed(32,'keydown')" onmouseup="simulateKeyPressed(32,'keyup')">u</button>
+    <div class="buttonContainer">
+      <button onmousedown="simulateKeyPressed(37,'keydown')" onmouseup="simulateKeyPressed(37,'keyup')"><i
+          class="fa-solid fa-circle-left"></i></button>
+      <button onmousedown="simulateKeyPressed(32,'keydown')" onmouseup="simulateKeyPressed(32,'keyup')"><i
+          class="fa-solid fa-turn-up"></i></button>
     </div>
     <div>
       <div class="start-screen" id="startScreen">
         <button class="btn-style" onclick="startGame()">START GAME</button>
-        <button class="btn-style" onclick="howToPlay()">HOW TO PLAY</button>
+        <button class="btn-style" onclick="openHowToPlay()">HOW TO PLAY</button>
         <button class="btn-style">EXAMPLE VIDEO</button>
-        <div>
-          <p>HOW TO PLAY</p>
-          <div></div>
+        <div id="mainHTP" class="backdrop d-none">
+          <div class="how-to-play">
+            <i onclick="closeHowToPlay()" class="fa-solid fa-circle-xmark top-right"></i>
+            <h3>HOW TO PLAY</h3>
+            <div class="how-to-play-explain">
+              <i class="fa-solid fa-circle-left"></i>
+              <p> PRESS A OR LEFT ARROW-KEY TO GO LEFT</p>
+            </div>
+            <div class="how-to-play-explain">
+              <i class="fa-solid fa-turn-up"></i>
+              <p> PRESS SPACE-KEY TO JUMP</p>
+            </div>
+            <div class="how-to-play-explain">
+              <i class="fa-solid fa-circle-right"></i>
+              <p> PRESS D OR RIGHT ARROW-KEY TO GO RIGHT</p>
+            </div>
+            <div class="how-to-play-explain">
+              <i class="fa-solid fa-bottle-droplet"></i>
+              <p> PRESS ENTER TO THROW BOTTLES</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -67,9 +88,11 @@
         <canvas id="canvas" class="d-none" width="720" height="480"> </canvas>
       </div>
     </div>
-    <div>
-      <button onmousedown="simulateKeyPressed(32,'keydown')" onmouseup="simulateKeyPressed(32,'keyup')">r</button>
-      <button onmousedown="simulateKeyPressed(32,'keydown')" onmouseup="simulateKeyPressed(32,'keyup')">e</button>
+    <div class="buttonContainer">
+      <button onmousedown="simulateKeyPressed(39,'keydown')" onmouseup="simulateKeyPressed(39,'keyup')"><i
+          class="fa-solid fa-circle-right"></i></button>
+      <button onmousedown="simulateKeyPressed(13,'keydown')" onmouseup="simulateKeyPressed(13,'keyup')"><i
+          class="fa-solid fa-bottle-droplet"></i></button>
     </div>
   </div>
 </body>

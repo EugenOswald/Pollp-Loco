@@ -219,7 +219,7 @@ class World {
 			this.flipImage(movableObject);
 		}
 		movableObject.draw(this.ctx);
-		movableObject.drawFrame(this.ctx);
+		// movableObject.drawFrame(this.ctx);
 
 		if (movableObject.otherDirection) {
 			this.flipImageBack(movableObject); // Mit dieser Function wird die dier Spiegelung rückgängig gemacht
