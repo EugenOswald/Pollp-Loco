@@ -65,8 +65,10 @@ class Character extends MovableObject {
 	walking_sound = new Audio("audio/walking.mp3");
 	jumping_sound = new Audio("audio/jump.mp3");
 
-	/*Wenn jemand irgendwo sagt 'new Character' wird automatisch ein constructor 
-    erstellt und aufgerufen und alles zwischen den gescheiften klammern ausgeführt.*/
+	/**
+	 *  Once a Character Object is created, its image path is stored in the src attribute of a newly created image object
+	 *  using 'loadImage()' of the super constructor
+	 */
 	constructor() {
 		super().loadImage("img/2_character_pepe/1_idle/idle/I-1.png");
 		this.loadImages(this.IMAGES_WALKING);
@@ -79,42 +81,30 @@ class Character extends MovableObject {
 		this.applyGravaity();
 		this.pepeStandingStill();
 		this.pepeMovement();
-		
 	}
 
+	/**
+	 * Checks where the character is moving to in an interval
+	 */
 	pepeMovement() {
 		setInterval(() => {
 			this.walking_sound.pause();
 			if (this.keyboardRight()) {
-				this.moveRight();
-				this.otherDirection = false;
-				if (world.muted == false) {
-					this.walking_sound.play();
-				}
+				this.characterRightMovement();
 			}
-
 			if (this.keyboardLeft()) {
-				this.moveLeft();
-				this.otherDirection = true;
-				if (world.muted == false) {
-					this.walking_sound.play();
-				}
+				this.characterLeftMovement();
 			}
-
 			if (this.keyboardJump()) {
-				// Es soll UP gedrückt werden und er soll nicht in der Luft sein
-				this.walking_sound.pause();
-				if (world.muted == false) {
-					this.jumping_sound.play();
-					this.jumping_sound.volume = 0.5;
-				}
-				this.jump(); // Geschwindichkeit des Jumps
+				this.characterJumpMovement();
 			}
-
-			this.world.camera_x = -this.x + 100; // Es wird ein Minus benötigt sonst würde sich die Kamera ins gegenteil bewegen
+			this.cameraFollowCharacter();
 		}, 1000 / 60);
 	}
 
+	/**
+	 * Checks in the interval what the character is doing to play the appropriate animations
+	 */
 	animate() {
 		setInterval(() => {
 			if (this.isDead()) {
@@ -131,6 +121,16 @@ class Character extends MovableObject {
 		}, 100);
 	}
 
+	/**
+	 * The camera tracks the character
+	 */
+	cameraFollowCharacter() {
+		this.world.camera_x = -this.x + 100;
+	}
+
+	/**
+	 * Checks the last interaction with pepe and plays the appropriate animations
+	 */
 	pepeSleepingWaitingAnimations() {
 		this.inactivePepe = new Date().getTime() - this.lastPepeAction;
 		if (this.inactivePepe > 2000) {
@@ -140,6 +140,9 @@ class Character extends MovableObject {
 		}
 	}
 
+	/**
+	 * Checks the last interaction with pepe
+	 */
 	pepeStandingStill() {
 		setInterval(() => {
 			if (this.noInteractionsWithPepe()) {
@@ -148,26 +151,85 @@ class Character extends MovableObject {
 		}, 100);
 	}
 
+	/**
+	 * Returns whether the appropriate keyboard key is pressed and the character is on the floor
+	 * @returns true or falses
+	 */
 	leftRightMoving() {
 		return this.world.keyboard.RIGHT || (this.world.keyboard.LEFT && !this.isAboveGround());
 	}
 
+	/**
+	 * sets speedY to 20
+	 */
 	jump() {
 		this.speedY = 20;
 	}
 
+	/**
+	 * Character moves to the right.
+	 * Sound is only played when it is muted == false
+	 */
+	characterRightMovement() {
+		this.moveRight();
+		this.otherDirection = false;
+		if (world.muted == false) {
+			this.walking_sound.play();
+		}
+	}
+
+	/**
+	 * Character moves to the left.
+	 * Sound is only played when it is muted == false
+	 */
+	characterLeftMovement() {
+		this.moveLeft();
+		this.otherDirection = true;
+		if (world.muted == false) {
+			this.walking_sound.play();
+		}
+	}
+	/**
+	 * Character Jump.
+	 * Sound is only played when it is muted == false
+	 */
+	characterJumpMovement() {
+		this.walking_sound.pause();
+		if (world.muted == false) {
+			this.jumping_sound.play();
+			this.jumping_sound.volume = 0.5;
+		}
+		this.jump();
+	}
+
+	/**
+	 * Keyboard key to the right must be pressed and the X of the character must not be bigger than that of the end boss
+	 * @returns true or false
+	 */
 	keyboardRight() {
 		return this.world.keyboard.RIGHT && this.x < this.world.endboss.x;
 	}
 
+	/**
+	 * Keyboard key to the left must be pressed and x must not be bigger than 0
+	 * @returns  true or false
+	 */
 	keyboardLeft() {
 		return this.world.keyboard.LEFT && this.x > 0;
 	}
 
+	/**
+	 * Keyboard key Space must be pressed and must not be above the ground
+	 * @returns  true or false
+	 */
 	keyboardJump() {
 		return this.world.keyboard.SPACE && !this.isAboveGround();
 	}
 
+	/**
+	 * Returns if there was an interaction with Pepe
+	 * @returns  true or false
+	 */
 	noInteractionsWithPepe() {
 		return (
 			this.world.keyboard.RIGHT ||
@@ -179,5 +241,4 @@ class Character extends MovableObject {
 			this.isDead()
 		);
 	}
-	
 }

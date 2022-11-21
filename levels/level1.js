@@ -1,8 +1,11 @@
 let level1;
+/**
+ * Creates a new level and stores everything in the variable level1
+ */
 function initLevel() {
   level1 = new Level(
 		[new Chicken(), new Chicken(), new Chicken(), new miniChicken(), new miniChicken(), new miniChicken(), new Endboss()],
-		[new Cloud(), new Cloud(719), new Cloud(1700)],
+		[new Cloud(), new Cloud(719), new Cloud(1200), new Cloud(1700), new Cloud(2200)],
 		[
 			new BackgroundObject("img/5_background/layers/air.png", -719),
 			new BackgroundObject("img/5_background/layers/3_third_layer/2.png", -719),

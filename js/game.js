@@ -5,6 +5,9 @@ let game_over_sound = new Audio("audio/game-over.mp3");
 let game_winner_sound = new Audio("audio/you-win.mp3");
 let gameFinish = false;
 
+/**
+ *  Starts the game and initiates the levels
+ */
 function startGame() {
 	document.getElementById("canvas").classList.remove("d-none");
 	document.getElementById("muteButton").classList.remove("d-none");
@@ -14,18 +17,31 @@ function startGame() {
 	init();
 }
 
+/**
+ * Opens the game instructions
+ */
 function openHowToPlay() {
 	document.getElementById("mainHTP").classList.remove("d-none");
 }
 
+/**
+ * Close the game instructions
+ */
 function closeHowToPlay() {
 	document.getElementById("mainHTP").classList.add("d-none");
 }
+
+/**
+ * initiates the Canvas world
+ */
 function init() {
 	canvas = document.getElementById("canvas");
 	world = new World(canvas, keyboard);
 }
 
+/**
+ * When the player has won, the winnerscreen comes up and sets gameFinish to True so that no bugs occur.
+ */
 function gameWinnerScreen() {
 	if (gameFinish == false) {
 		keyboard.MUTE = true;
@@ -41,6 +57,9 @@ function gameWinnerScreen() {
 	}
 }
 
+/**
+ * When the player has lose, the overrscreen comes up and sets gameFinish to True so that no bugs occur.
+ */
 function gameOverScreen() {
 	if (gameFinish == false) {
 		keyboard.MUTE = true;
@@ -55,22 +74,34 @@ function gameOverScreen() {
 	}
 }
 
+/**
+ * reloads the page
+ */
 function backToStartScreen() {
 	location.reload();
 }
 
+/**
+ * Set the game to mute and change the MuteIcon
+ */
 function muteGame() {
 	document.getElementById("endMuteButton").classList.remove("d-none");
 	document.getElementById("muteButton").classList.add("d-none");
 	keyboard.MUTE = true;
 }
 
+/**
+ * Removes the mute and changes the MuteIcon
+ */
 function endMuteGame() {
 	document.getElementById("muteButton").classList.remove("d-none");
 	document.getElementById("endMuteButton").classList.add("d-none");
 	keyboard.MUTE = false;
 }
 
+/**
+ * Set the game to fullscreen and change the fullscreen icon.
+ */
 function fullscreenGame() {
 	let fullscreen = document.getElementById("fullscreen");
 	document.getElementById("endFullscreen").classList.remove("d-none");
@@ -78,6 +109,9 @@ function fullscreenGame() {
 	enterFullscreen(fullscreen);
 }
 
+/**
+ * Resets the fullscreeen and changes the icon
+ */
 function endFullscreenGame() {
 	let endfullscreen = document.getElementById("fullscreen");
 	document.getElementById("fullscreenButton").classList.remove("d-none");
@@ -85,6 +119,10 @@ function endFullscreenGame() {
 	exitFullscreen(endfullscreen);
 }
 
+/**
+ * Set Fullscreen (Source) https://wiki.selfhtml.org/wiki/JavaScript/Fullscreen
+ * @param {HTML-Element} element - HTML-ID Which DIV should become fullscreen
+ */
 function enterFullscreen(element) {
 	if (element.requestFullscreen) {
 		element.requestFullscreen();
@@ -97,6 +135,9 @@ function enterFullscreen(element) {
 	}
 }
 
+/**
+ * Go out of fullscreen mode
+ */
 function exitFullscreen() {
 	if (document.exitFullscreen) {
 		document.exitFullscreen();
@@ -105,11 +146,15 @@ function exitFullscreen() {
 	}
 }
 
+/**
+ * A key operation is simulated and returns true and false
+ * @param {Number} keyCode -  keyCode of the pressed key
+ * @param {String} type - From event if keydown or keyup
+ */
 function simulateKeyPressed(keyCode, type) {
-	let e = document.createEvent("HTMLEvents"); //Event is created
-	e.initEvent(type, true, false); //Event is initialised
-	e.keyCode = keyCode; //Event gets the keyCode
-
+	let e = document.createEvent("HTMLEvents");
+	e.initEvent(type, true, false);
+	e.keyCode = keyCode;
 	document.dispatchEvent(e);
 
 	// -------------------------KEYDOWN----------------------
@@ -152,6 +197,9 @@ function simulateKeyPressed(keyCode, type) {
 	}
 }
 
+/**
+ * Returns which key is pressed and returns true
+ */
 window.addEventListener("keydown", (e) => {
 	if (e.keyCode == 39) {
 		keyboard.RIGHT = true;
@@ -173,6 +221,9 @@ window.addEventListener("keydown", (e) => {
 	}
 });
 
+/**
+ * Returns which key is in the Up movement and sets true to false
+ */
 window.addEventListener("keyup", (e) => {
 	if (e.keyCode == 39) {
 		keyboard.RIGHT = false;

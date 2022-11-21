@@ -34,6 +34,14 @@ canvas {
 	display: none !important;
 }
 
+.rotate {
+	display: none;
+	margin-top: 100px;
+	position: absolute;
+	border-radius: 20px;
+	background-color: #202124;
+}
+
 .start-screen {
 	display: flex;
 	justify-content: center;
@@ -263,6 +271,10 @@ canvas {
 		font-size: 50px;
 		margin-top: 80px;
 	}
+
+	.rotate img{
+		width: 150px;
+	}
 }
 @media only screen and (max-width: 660px) {
 	.start-screen {
@@ -353,5 +365,12 @@ canvas {
 
 	.btn-style {
 		width: 80px;
+	}
+}
+
+@media (min-height: 610px) and (max-height: 915px) and (min-width: 200px) and (max-width: 750px) {
+	.rotate {
+		z-index: 5;
+		display: flex;
 	}
 }
