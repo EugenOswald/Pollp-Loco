@@ -12,7 +12,9 @@ class Cloud extends MovableObject {
 		this.x = 500 + Math.random() * 2000; // Math.random() generiert nur eine zahl zwischen 0 - 1  z.B. 0,45
 		this.animate();
 	}
-
+	/**
+	 * Cloud animation to the left
+	 */
 	animate() {
 		this.moveLeft();
 	}

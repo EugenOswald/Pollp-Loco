@@ -8,6 +8,7 @@ class Chicken extends MovableObject {
 		left: 5,
 		right: 5,
 	};
+	isChickenDeath = false;
 	energy = 2;
 	CHICKEN_WALKING = [
 		"img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
@@ -15,11 +16,11 @@ class Chicken extends MovableObject {
 		"img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
 	];
 	CHICKEN_DEAD = ["img/3_enemies_chicken/chicken_normal/2_dead/dead.png", "img/3_enemies_chicken/chicken_normal/2_dead/dead.png"];
-	kill_chicken_sound = new Audio("audio/chicken.mp3");
+	
 
 	/**
 	 *  Once a Chicken Object is created, its image path is stored in the src attribute of a newly created image object
-	 *  using 'loadImage()' of the super constructor
+	 *  using 'loadImage()' of the super constructor. Places them on different X positions
 	 */
 	constructor() {
 		super().loadImage(this.CHICKEN_WALKING[0]);
@@ -38,7 +39,8 @@ class Chicken extends MovableObject {
 		setInterval(() => {
 			if (!this.isDead()) {
 				this.moveLeft();
-			}
+				
+			} else this.playDeathSound();
 		}, 1000 / 60);
 	}
 
@@ -46,11 +48,12 @@ class Chicken extends MovableObject {
 	 * In the interval it is checked if the chicken has died to play a sound if muted == false
 	 */
 	playDeathSound() {
-		if (this.isDead()) {
-			if (muted == false) {
-				this.kill_chicken_sound.play();
-				this.kill_chicken_sound.volume = 0.5;
+		if (this.isChickenDeath == false) {
+			if (world.muted == false) {
+				world.kill_chicken_sound.play();
+				world.kill_chicken_sound.volume = 0.2;
 			}
+			this.isChickenDeath = true;
 		}
 	}
 

@@ -13,6 +13,9 @@ class MovableObject extends DrawableObject {
 		right: 0,
 	};
 
+	/**
+	 * Pulls energy or remembers the last hit
+	 */
 	hit() {
 		this.energy -= 1;
 		if (this.energy < 0) {
@@ -22,6 +25,9 @@ class MovableObject extends DrawableObject {
 		}
 	}
 
+	/**
+	 * When the character is on the ground, he is pushed back and lifted slightly into the air
+	 */
 	hitsBack() {
 		this.x -= 1;
 		if (this.world.character.y >= 160) {
@@ -29,6 +35,9 @@ class MovableObject extends DrawableObject {
 		}
 	}
 
+	/**
+	 * When the character jumps on the head of an enemy, flies again easily into the air
+	 */
 	headJump() {
 		if (world.muted == false) {
 			this.reJump_sound.play();
@@ -37,16 +46,27 @@ class MovableObject extends DrawableObject {
 		this.speedY = 10;
 	}
 
+	/**
+	 * It is looked when the character was hurt the last time
+	 * @returns past time
+	 */
 	isHurt() {
 		let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
 		timepassed = timepassed / 1000; // Difference in s
 		return timepassed < 1;
 	}
 
+	/**
+	 * Checks if the energy is at 0
+	 * @returns true or false
+	 */
 	isDead() {
 		return this.energy <= 0;
 	}
 
+	/**
+	 * Gravity to the right
+	 */
 	applyGravaity() {
 		setInterval(() => {
 			if (this.isAboveGround() || this.speedY > 0) {
@@ -55,6 +75,10 @@ class MovableObject extends DrawableObject {
 			}
 		}, 1000 / 25);
 	}
+
+	/**
+	 * Gravity to the left
+	 */
 	applyGravaityOtherDirection() {
 		setInterval(() => {
 			if (this.isAboveGround() || this.speedY < 0) {
@@ -64,16 +88,23 @@ class MovableObject extends DrawableObject {
 		}, 1000 / 25);
 	}
 
+	/**
+	 * Checks if it is above the ground
+	 * @returns true if is a Throwable Object
+	 */
 	isAboveGround() {
 		if (this instanceof ThrowableObjects) {
-			// Throwable objacts should alwasy fall
 			return true;
 		} else {
 			return this.y < 170;
 		}
 	}
 
-	// character.isColliding(chicken)
+	/**
+	 * Checks if a Obcejt colliding
+	 * @param {Object} mo - MoveableObject -Chicken, Character, Endboss etc.
+	 * @returns true if colliding
+	 */
 	isColliding(mo) {
 		return (
 			this.x + this.width - this.offset.right > mo.x + mo.offset.left && // R => L
@@ -83,15 +114,25 @@ class MovableObject extends DrawableObject {
 		); // B => T
 	}
 
+	/**
+	 * Movement to the right
+	 */
 	moveRight() {
 		this.x += this.speed;
 		this.otherDirection = false;
 	}
 
+	/**
+	 * Movement to the left
+	 */
 	moveLeft() {
 		this.x -= this.speed;
 	}
 
+	/**
+	 *  Loops through an Array with paths of Images if it is called repeatedly with setInterval()
+	 * @param {string} images  Array with contains paths of images
+	 */
 	playAnimation(images) {
 		// % bedeute modulo und bedeutet der Rest https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder
 		let i = this.currentImage % images.length; // hier steht " let i = 0 % 6  " % Modulo ist der mathematische rest
@@ -101,6 +142,9 @@ class MovableObject extends DrawableObject {
 		this.currentImage++;
 	}
 
+	/**
+	 * Jump in the air
+	 */
 	jump() {
 		this.speedY = 25;
 	}

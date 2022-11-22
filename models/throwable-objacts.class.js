@@ -20,6 +20,12 @@ class ThrowableObjects extends MovableObject {
 		right: 5,
 	};
 
+	/**
+	 * As soon as a Throwable-Object gets created, it's Image path is stored into the src attribute of a newly createt Image-Object
+	 * via 'loadImage()' & 'loadImages()' of the Super-Constructor AND Throwable-Object is thrown immediatle* y
+	 * @param {*} x - x-value from which the throw starts
+	 * @param {*} y - y-value from which the throw starts
+	 */
 	constructor(x, y) {
 		super().loadImage(this.BOTTLE_ROTATION[0]);
 		this.loadImages(this.BOTTLE_ROTATION);
@@ -28,34 +34,70 @@ class ThrowableObjects extends MovableObject {
 		this.y = y;
 		this.height = 70;
 		this.width = 70;
-		this.trow();
+		this.throw();
 	}
 
-	trow() {
-		if (world.collectedBottles.length > 0 && !world.character.otherDirection) {
-			setInterval(() => {
-				this.playAnimation(this.BOTTLE_ROTATION);
-			}, 150);
-			this.speedY = 18;
-			this.applyGravaity();
-			setInterval(() => {
-				this.x += 5;
-			}, 1000 / 60);
+	/**
+	 * Throws a bottle in one direction and then removes it from the collectedBottles array
+	 */
+	throw() {
+		if (this.hasBottlesAndLooksRight()) {
+			this.throwRightAnimation();
 			world.collectedBottles.splice(0, 1);
 		}
-		if (world.collectedBottles.length > 0 && world.character.otherDirection) {
-			setInterval(() => {
-				this.playAnimation(this.BOTTLE_ROTATION);
-			}, 150);
-			this.speedY = -18;
-			this.applyGravaityOtherDirection();
-			setInterval(() => {
-				this.x -= 5;
-			}, 1000 / 60);
+		if (this.hasBottlesAndLooksLeft()) {
+			this.throwLeftAnimation();
 			world.collectedBottles.splice(0, 1);
 		}
 	}
 
+	/**
+	 * Has a bottle in the array and looks to the right
+	 * @returns true
+	 */
+	hasBottlesAndLooksRight() {
+		return world.collectedBottles.length > 0 && !world.character.otherDirection;
+	}
+
+	/**
+	 * Has a bottle in the array and looks to the left
+	 * @returns true
+	 */
+	hasBottlesAndLooksLeft() {
+		return world.collectedBottles.length > 0 && world.character.otherDirection;
+	}
+
+	/**
+	 * Throw animation to the left
+	 */
+	throwLeftAnimation() {
+		setInterval(() => {
+			this.playAnimation(this.BOTTLE_ROTATION);
+		}, 150);
+		this.speedY = -18;
+		this.applyGravaityOtherDirection();
+		setInterval(() => {
+			this.x -= 5;
+		}, 1000 / 60);
+	}
+
+	/**
+	 * Throw animation to the right
+	 */
+	throwRightAnimation() {
+		setInterval(() => {
+			this.playAnimation(this.BOTTLE_ROTATION);
+		}, 150);
+		this.speedY = 18;
+		this.applyGravaity();
+		setInterval(() => {
+			this.x += 5;
+		}, 1000 / 60);
+	}
+
+	/**
+	 * Animation of a broken sleep
+	 */
 	splashAnimation() {
 		setInterval(() => {
 			this.playAnimation(this.BOTTLE_SPLASH);

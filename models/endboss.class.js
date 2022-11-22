@@ -49,6 +49,11 @@ class Endboss extends MovableObject {
 		"img/4_enemie_boss_chicken/5_dead/G26.png",
 	];
 	speed = 1.5;
+
+	/**
+	 *  Once a Endboss Object is created, its image path is stored in the src attribute of a newly created image object
+	 *  using 'loadImage()' of the super constructor. Places them on fix X positions
+	 */
 	constructor() {
 		super().loadImage(this.IMAGES_ALERTA[0]);
 		this.loadImages(this.IMAGES_WALKING);
@@ -61,25 +66,43 @@ class Endboss extends MovableObject {
 		this.movement();
 	}
 
+	/**
+	 * Depending on the distance or condition of the end boss, a suitable animation is played
+	 */
 	animate() {
 		setInterval(() => {
 			if (this.energy <= 0) {
 				this.speed = 0;
 				this.playAnimation(this.ENDBOSS_DEAD);
-				// DEAD Sound
-				// Win Screen
-			} else if (world.endboss.x - world.character.x <= 150) {
+			} else if (this.distanceTooClose()) {
 				this.playAnimation(this.IMAGES_ATTACK);
 			} else if (this.checkDistancePepeEndboss() || this.checkIfEndbossMoved()) {
 				this.playAnimation(this.IMAGES_WALKING);
-				world.endbossBar.width = 250;
-				world.endbossBarHeart.width = 80;
+				this.endbossBarSize();
 			} else {
 				this.playAnimation(this.IMAGES_ALERTA);
 			}
 		}, 300);
 	}
 
+	/**
+	 * Size of the enbossBar and the heart
+	 */
+	endbossBarSize() {
+		world.endbossBar.width = 250;
+		world.endbossBarHeart.width = 80;
+	}
+
+	/**
+	 * Checked if the caracter is too close to the boss
+	 */
+	distanceTooClose() {
+		world.endboss.x - world.character.x <= 150;
+	}
+
+	/*
+	 * Checked in the interval whether the character has come near the boss or he has met him
+	 */
 	movement() {
 		setInterval(() => {
 			if (this.checkDistancePepeEndboss() || (this.checkIfEndbossMoved() && this.energy > 0)) {
@@ -88,10 +111,17 @@ class Endboss extends MovableObject {
 		}, 1000 / 60);
 	}
 
+	/**
+	 * Checks whether the character passes a certain X
+	 * @returns true or falese
+	 */
 	checkDistancePepeEndboss() {
 		return world.character.x > 1950;
 	}
-
+	/**
+	 * Checks if the end boss has moved or taken damage
+	 * @returns true or falese
+	 */
 	checkIfEndbossMoved() {
 		return world.endboss.x < 2300 || this.energy < 99;
 	}

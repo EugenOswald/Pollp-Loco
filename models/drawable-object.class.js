@@ -7,16 +7,27 @@ class DrawableObject {
 	height = 200;
 	width = 100;
 
-	// loadImage('img/testBild.png);
+	/**
+	 * Creates a new Img object and gives in the image path
+	 * @param {string} path - Path of Image for the Image-Object that is created
+	 */
 	loadImage(path) {
 		this.img = new Image(); // <=>   this.img = document.getElementById('image') <img id="image" src>
 		this.img.src = path;
 	}
 
+	/**
+	 * Draws an Image at (x,y) with a certain width and a certain height
+	 * @param {string} ctx - Context of our Canvas 2D or 3D
+	 */
 	draw(ctx) {
 		ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 	}
 
+	/**
+	 * Draws a frame around the special objects
+	 * @param {string} ctx - Context of our Canvas 2D or 3D
+	 */
 	// drawFrame(ctx) {
 	// 	// Alle Objekte einen Rand geben
 	// 	if (
@@ -28,7 +39,7 @@ class DrawableObject {
 	// 		this instanceof Bottle ||
 	// 		this instanceof ThrowableObjects
 	// 	) {
-	// 		// Nur diese angegebenen Classen erhalten einen boarder
+	// 		// Only these specified classes receive a boarder
 	// 		ctx.beginPath();
 	// 		ctx.lineWidth = "1";
 	// 		ctx.strokeStyle = "blue";
@@ -38,6 +49,10 @@ class DrawableObject {
 	// 	}
 	// }
 
+	/**
+	 * Draws an offset frame around the special objects
+	 * @param {string} ctx - Context of our Canvas 2D or 3D
+	 */
 	drawOffset(ctx) {
 		ctx.beginPath();
 		ctx.lineWidth = "1";
@@ -52,8 +67,8 @@ class DrawableObject {
 	}
 
 	/**
-	 *
-	 * @param {Array} array - ['img/image.1.png','img/image.2.png', ...]
+	 * Creates many new Image-Objects, gives them an Image-Path and stores them in 'this.imageCache'
+	 * @param {string} array - Paths of Images for the Image-Objects that are created ['img/1.png', 'img/2.png', ...]
 	 */
 	loadImages(array) {
 		array.forEach((path) => {
@@ -63,6 +78,4 @@ class DrawableObject {
 			this.imageCashe[path] = img;
 		});
 	}
-
-	
 }
