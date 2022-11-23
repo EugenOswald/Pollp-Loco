@@ -87,7 +87,6 @@ class World {
 	checkCollectBottle() {
 		this.level.bottles.forEach((bottle, indexBottles) => {
 			if (this.character.isColliding(bottle)) {
-				//if (this.this.muted == false) {this.bottle_sound.play();}
 				this.collectedBottles.push(bottle);
 				this.level.bottles.splice(indexBottles, 1);
 			}
@@ -265,7 +264,8 @@ class World {
 			this.character.isAboveGround() &&
 			this.character.isColliding(enemy) &&
 			this.isNotEndboss(enemy, indexEnemy) &&
-			this.level.enemies[indexEnemy].energy > 1 && this.character.y < 200
+			this.level.enemies[indexEnemy].energy > 1 &&
+			this.character.y < 200
 		);
 	}
 
@@ -297,8 +297,7 @@ class World {
 	 */
 	draw() {
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		// wird benötigen das um Canvas zu clearn das wird es neu Updaten können.
-		this.ctx.translate(this.camera_x, 0); // Unser gesamter Ausschnitt wird um -100 verschoben   -- translate verschiebt alles um eine gewisse Variabele
+		this.ctx.translate(this.camera_x, 0);
 		this.addObjectsToMap(this.level.backgroundObjects);
 		this.addObjectsToMap(this.level.clouds);
 		this.addObjectsToMap(this.level.coins);
@@ -306,26 +305,18 @@ class World {
 		this.addObjectsToMap(this.level.enemies);
 		this.addObjectsToMap(this.throwableObjects);
 		this.addToMap(this.character);
-		this.ctx.translate(-this.camera_x, 0); // das Minus bei this steht fürs gegenteil
+		this.ctx.translate(-this.camera_x, 0);
 		this.addToMap(this.healthBar);
 		this.addToMap(this.endbossBar);
 		this.addToMap(this.endbossBarHeart);
 		this.addToMap(this.bottleBar);
 		this.addToMap(this.coinBar);
-		// draw() wird immer wierder aufgerufen
-		//die function draw() wird sehr oft in einem Spiel ausgeführt, wenn man draw() alleine einfügen würde ->
-		// Würde es das System Crashen lassen,deswegen benutzt man requestAnimationFrame(function siehe funtcion unten)
 		let self = this;
 		requestAnimationFrame(function () {
-			// Die function wird ausgeführt wenn alles überder function gezeichnet wurde.
-			// Die function wird etwas async (etwas später) ausgeführt.
-			self.draw(); // Wenn man sowas hat kennt die function this. nicht mehr. Deshalb let self = this
+			self.draw();
 		});
 	}
 
-	clearcanvas() {
-		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-	}
 	/**
 	 * Adds an Array of Objects to the canvas
 	 * @param {Array} objects - Array which contains objects
@@ -342,14 +333,13 @@ class World {
 	 */
 	addToMap(movableObject) {
 		if (movableObject.otherDirection) {
-			// Hier schauen wir ob das Bild eine andere richtung haben soll was wir einfügen möchten
 			this.flipImage(movableObject);
 		}
 		movableObject.draw(this.ctx);
 		movableObject.drawFrame(this.ctx);
 
 		if (movableObject.otherDirection) {
-			this.flipImageBack(movableObject); // Mit dieser Function wird die dier Spiegelung rückgängig gemacht
+			this.flipImageBack(movableObject);
 		}
 	}
 
@@ -358,9 +348,9 @@ class World {
 	 * @param {Object} movableObject Object to be flipped
 	 */
 	flipImage(movableObject) {
-		this.ctx.save(); // Speichert die aktuellen eigenschaften vom Kontext, weil wir wollen die nächsten Bilder wieder Normal hinzufügen
-		this.ctx.translate(movableObject.width, 0); // Hier ändern wir die methode wie die Bilder eingefügt werden.
-		this.ctx.scale(-1, 1); //Hiermit wird das Bild gespiegelt
+		this.ctx.save();
+		this.ctx.translate(movableObject.width, 0);
+		this.ctx.scale(-1, 1);
 		movableObject.x = movableObject.x * -1;
 	}
 
@@ -395,10 +385,12 @@ class World {
 		allIntervals.push(this.checkGameEndInterval);
 	}
 
+	/**
+	 * Empty the arrays
+	 */
 	resetGame() {
 		this.throwableObjects = [];
 		this.collectedBottles = [];
 		this.collectedCoins = [];
-		
 	}
 }

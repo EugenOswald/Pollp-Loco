@@ -6,7 +6,7 @@ class EndbossBarHeart extends DrawableObject {
 	 *  using 'loadImage()' of the super constructor. 
 	 */
 	constructor() {
-		super().loadImage(this.IMAGES_BOSSHEART[0]); // Es wird super benötigt um alles vom übergeordnetem Ordner zu initalisieren
+		super().loadImage(this.IMAGES_BOSSHEART[0]); 
 		this.x = 430;
 		this.y = 5;
 		this.width = 0;

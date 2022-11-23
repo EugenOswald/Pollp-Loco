@@ -16,7 +16,7 @@ class EndbossBar extends DrawableObject {
 	 */
 	constructor() {
 		super();
-		this.loadImage(this.IMAGES_BOSSHEART[0]); // Es wird super benötigt um alles vom übergeordnetem Ordner zu initalisieren
+		this.loadImage(this.IMAGES_BOSSHEART[0]); 
 		this.loadImage(this.IMAGES_BOSSHEALTH[0]);
 		this.loadImages(this.IMAGES_BOSSHEALTH);
 		this.x = 450;

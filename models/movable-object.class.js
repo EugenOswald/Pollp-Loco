@@ -21,7 +21,7 @@ class MovableObject extends DrawableObject {
 		if (this.energy < 0) {
 			this.energy = 0;
 		} else {
-			this.lastHit = new Date().getTime(); // Letzter Zeitpunkt mit 0Hp wird gespeichert
+			this.lastHit = new Date().getTime();
 		}
 	}
 
@@ -51,8 +51,8 @@ class MovableObject extends DrawableObject {
 	 * @returns past time
 	 */
 	isHurt() {
-		let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
-		timepassed = timepassed / 1000; // Difference in s
+		let timepassed = new Date().getTime() - this.lastHit; 
+		timepassed = timepassed / 1000; 
 		return timepassed < 1;
 	}
 
@@ -109,9 +109,9 @@ class MovableObject extends DrawableObject {
 	 */
 	isColliding(mo) {
 		return (
-			this.x + this.width - this.offset.right > mo.x + mo.offset.left && // R => L
-			this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && // T => B
-			this.x + this.offset.left < mo.x + mo.width - mo.offset.right && // L => R
+			this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+			this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+			this.x + this.offset.left < mo.x + mo.width - mo.offset.right && 
 			this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
 		); // B => T
 	}
@@ -136,9 +136,7 @@ class MovableObject extends DrawableObject {
 	 * @param {string} images  Array with contains paths of images
 	 */
 	playAnimation(images) {
-		// % bedeute modulo und bedeutet der Rest https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder
-		let i = this.currentImage % images.length; // hier steht " let i = 0 % 6  " % Modulo ist der mathematische rest
-		// i = 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, ...
+		let i = this.currentImage % images.length; 
 		let path = images[i];
 		this.img = this.imageCashe[path];
 		this.currentImage++;

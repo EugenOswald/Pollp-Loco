@@ -65,7 +65,7 @@ function gameWinnerScreen() {
 }
 
 /**
- * When the player has lose, the overrscreen comes up and sets gameFinish to True so that no bugs occur.
+ * When the player has lose, the overrscreen comes up and sets gameFinish to True so that no bugs occur. finishes all intervals
  */
 function gameOverScreen() {
 	if (gameFinish == false) {
@@ -81,7 +81,6 @@ function gameOverScreen() {
 		document.getElementById("buttonsRight").classList.add("d-none");
 		document.getElementById("endMuteButton").classList.add("d-none");
 		document.getElementById("gameOverScreen").classList.remove("d-none");
-		world.clearcanvas();
 		gameFinish = true;
 	}
 }

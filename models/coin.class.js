@@ -17,6 +17,6 @@ class Coin extends MovableObject {
 		super().loadImage(this.COIN_IMAGE[0]);
 		this.loadImages(this.COIN_IMAGE);
 		this.y = 160 + Math.random() * 100;
-		this.x = 500 + Math.random() * 3 * Math.random() * 600; // Math.random() generiert nur eine zahl zwischen 0 - 1  z.B. 0,45
+		this.x = 500 + Math.random() * 3 * Math.random() * 600;
 	}
 }

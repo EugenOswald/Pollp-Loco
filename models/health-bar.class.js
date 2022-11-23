@@ -15,7 +15,7 @@ class HealthBar extends DrawableObject {
 	 *  using 'loadImage()' of the super constructor.
 	 */
 	constructor() {
-		super(); // Es wird super benötigt um alles vom übergeordnetem Ordner zu initalisieren
+		super();
 		this.loadImages(this.IMAGES_HEALTH);
 		this.x = 20;
 		this.y = 0;
@@ -30,7 +30,7 @@ class HealthBar extends DrawableObject {
 	 * @param {Number} percentage - How much life has the character
 	 */
 	setPercentage(percentage) {
-		this.percentage = percentage; // => 0...5
+		this.percentage = percentage; 
 		let path = this.IMAGES_HEALTH[this.resolveImageIndex()];
 		this.img = this.imageCashe[path];
 	}

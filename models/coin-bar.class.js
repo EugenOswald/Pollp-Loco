@@ -13,7 +13,7 @@ class CoinBar extends DrawableObject {
 	 *  using 'loadImage()' of the super constructor
 	 */
 	constructor() {
-		super().loadImage(this.IMAGES_COIN_BAR[0]); // Es wird super benötigt um alles vom übergeordnetem Ordner zu initalisieren
+		super().loadImage(this.IMAGES_COIN_BAR[0]);
 		this.x = 20;
 		this.y = 50;
 		this.width = 200;
