@@ -6,7 +6,7 @@
 body {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	height: 100vh;
 	margin: 0;
@@ -264,6 +264,11 @@ canvas {
 }
 
 @media only screen and (max-width: 860px) {
+
+	body{
+		justify-content: center;
+	}
+
 	#canvas {
 		width: calc(100vw - (2 * 70px));
 	}
@@ -299,10 +304,6 @@ canvas {
 	}
 
 	.how-to-play {
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
 		position: absolute;
 		width: 100vw;
 		height: 100vh;

@@ -42,7 +42,7 @@ class World {
 	 * checks if mute is false or true
 	 */
 	isMuted() {
-		isMutedIntervall = setInterval(() => {
+		this.isMutedIntervall = setInterval(() => {
 			if (keyboard.MUTE == false) {
 				this.muted = false;
 			} else if (keyboard.MUTE == true) {
@@ -56,7 +56,7 @@ class World {
 	 * In the interval, all collisions are made queries
 	 */
 	collectObjects() {
-		collectObjectsInterval = setInterval(() => {
+		this.collectObjectsInterval = setInterval(() => {
 			this.checkCollectCoin();
 			this.checkCollectBottle();
 			this.checkCollisionThrowObject();
@@ -105,7 +105,7 @@ class World {
 	 * Checks if something is thrown, if the game is muted, if the background music is still playing and if the game is over.
 	 */
 	run() {
-		runInterval = setInterval(() => {
+		this.runInterval = setInterval(() => {
 			this.checkThrowObjects();
 			this.isMuted();
 			this.backgroundMusic();
@@ -216,7 +216,7 @@ class World {
 	 * Collisions with enemies with the boss and with enemies from above are checked
 	 */
 	checkCollisions() {
-		checkCollisionsIntervall = setInterval(() => {
+		this.checkCollisionsIntervall = setInterval(() => {
 			this.level.enemies.forEach((enemy, indexEnemy) => {
 				if (this.aboutGroundCollideEnemies(enemy, indexEnemy)) {
 					this.killingHeadJump(indexEnemy);
@@ -385,7 +385,7 @@ class World {
 	 * Checks in the interval whether the boss has 0 life or the character
 	 */
 	checkGameEnd() {
-		checkGameEndInterval = setInterval(() => {
+		this.checkGameEndInterval = setInterval(() => {
 			if (this.level.enemies[6].energy <= 0) {
 				gameWinnerScreen();
 			} else if (world.character.energy <= 0) {

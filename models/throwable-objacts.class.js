@@ -71,13 +71,13 @@ class ThrowableObjects extends MovableObject {
 	 * Throw animation to the left
 	 */
 	throwLeftAnimation() {
-		throwLeftAnimationInterval1 = setInterval(() => {
+		this.throwLeftAnimationInterval1 = setInterval(() => {
 			this.playAnimation(this.BOTTLE_ROTATION);
 		}, 150);
 		allIntervals.push(this.throwLeftAnimationInterval1);
 		this.speedY = -18;
 		this.applyGravaityOtherDirection();
-		throwLeftAnimationInterval2 = setInterval(() => {
+		this.throwLeftAnimationInterval2 = setInterval(() => {
 			this.x -= 5;
 		}, 1000 / 60);
 		allIntervals.push(this.throwLeftAnimationInterval2);
@@ -87,13 +87,13 @@ class ThrowableObjects extends MovableObject {
 	 * Throw animation to the right
 	 */
 	throwRightAnimation() {
-		throwRightAnimationInterval1 = setInterval(() => {
+		this.throwRightAnimationInterval1 = setInterval(() => {
 			this.playAnimation(this.BOTTLE_ROTATION);
 		}, 150);
 		allIntervals.push(this.throwRightAnimationInterval1);
 		this.speedY = 18;
 		this.applyGravaity();
-		throwRightAnimationInterval2 = setInterval(() => {
+		this.throwRightAnimationInterval2 = setInterval(() => {
 			this.x += 5;
 		}, 1000 / 60);
 		allIntervals.push(this.throwRightAnimationInterval2);
@@ -103,7 +103,7 @@ class ThrowableObjects extends MovableObject {
 	 * Animation of a broken sleep
 	 */
 	splashAnimation() {
-		splashAnimationIntervall = setInterval(() => {
+		this.splashAnimationIntervall = setInterval(() => {
 			this.playAnimation(this.BOTTLE_SPLASH);
 		}, 5);
 		allIntervals.push(this.splashAnimationIntervall);

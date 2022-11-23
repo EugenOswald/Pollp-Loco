@@ -47,6 +47,7 @@ function init() {
  */
 function gameWinnerScreen() {
 	if (gameFinish == false) {
+		allIntervals.forEach(clearInterval);
 		keyboard.MUTE = true;
 		game_winner_sound.play();
 		game_winner_sound.volume = 0.4;
@@ -67,6 +68,7 @@ function gameWinnerScreen() {
  */
 function gameOverScreen() {
 	if (gameFinish == false) {
+		allIntervals.forEach(clearInterval);
 		keyboard.MUTE = true;
 		game_over_sound.play();
 		document.getElementById("endFullscreen").classList.add("d-none");
@@ -86,7 +88,6 @@ function gameOverScreen() {
  * reloads the page
  */
 function backToStartScreen() {
-	allIntervals.forEach(clearInterval);
 	world.resetGame();
 	keyboard.MUTE = false;
 	document.getElementById("canvas").classList.add("d-none");
