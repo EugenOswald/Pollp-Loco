@@ -28,26 +28,26 @@ class DrawableObject {
 	 * Draws a frame around the special objects
 	 * @param {string} ctx - Context of our Canvas 2D or 3D
 	 */
-	// drawFrame(ctx) {
-	// 	// Alle Objekte einen Rand geben
-	// 	if (
-	// 		this instanceof Character ||
-	// 		this instanceof Chicken ||
-	// 		this instanceof miniChicken ||
-	// 		this instanceof Endboss ||
-	// 		this instanceof Coin ||
-	// 		this instanceof Bottle ||
-	// 		this instanceof ThrowableObjects
-	// 	) {
-	// 		// Only these specified classes receive a boarder
-	// 		ctx.beginPath();
-	// 		ctx.lineWidth = "1";
-	// 		ctx.strokeStyle = "blue";
-	// 		ctx.rect(this.x, this.y, this.width, this.height);
-	// 		ctx.stroke();
-	// 		this.drawOffset(ctx);
-	// 	}
-	// }
+	drawFrame(ctx) {
+		// Alle Objekte einen Rand geben
+		if (
+			this instanceof Character ||
+			this instanceof Chicken ||
+			this instanceof miniChicken ||
+			this instanceof Endboss ||
+			this instanceof Coin ||
+			this instanceof Bottle ||
+			this instanceof ThrowableObjects
+		) {
+			// Only these specified classes receive a boarder
+			ctx.beginPath();
+			ctx.lineWidth = "1";
+			ctx.strokeStyle = "blue";
+			ctx.rect(this.x, this.y, this.width, this.height);
+			ctx.stroke();
+			this.drawOffset(ctx);
+		}
+	}
 
 	/**
 	 * Draws an offset frame around the special objects
@@ -77,5 +77,21 @@ class DrawableObject {
 			img.style = "transform: scaleX(-1)";
 			this.imageCashe[path] = img;
 		});
+	}
+
+	setBar(array, imageBar) {
+		if (array >= 10) {
+			this.loadImage(imageBar[5]);
+		} else if (array >= 8) {
+			this.loadImage(imageBar[4]);
+		} else if (array >= 6) {
+			this.loadImage(imageBar[3]);
+		} else if (array >= 4) {
+			this.loadImage(imageBar[2]);
+		} else if (array >= 2) {
+			this.loadImage(imageBar[1]);
+		} else {
+			this.loadImage(imageBar[0]);
+		}
 	}
 }

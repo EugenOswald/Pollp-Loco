@@ -70,7 +70,7 @@ class Endboss extends MovableObject {
 	 * Depending on the distance or condition of the end boss, a suitable animation is played
 	 */
 	animate() {
-		setInterval(() => {
+		this.endbossAnimateInterval = setInterval(() => {
 			if (this.energy <= 0) {
 				this.speed = 0;
 				this.playAnimation(this.ENDBOSS_DEAD);
@@ -83,6 +83,7 @@ class Endboss extends MovableObject {
 				this.playAnimation(this.IMAGES_ALERTA);
 			}
 		}, 300);
+		allIntervals.push(this.endbossAnimateInterval);
 	}
 
 	/**
@@ -104,11 +105,12 @@ class Endboss extends MovableObject {
 	 * Checked in the interval whether the character has come near the boss or he has met him
 	 */
 	movement() {
-		setInterval(() => {
+		this.endbossMovementInverval = setInterval(() => {
 			if (this.checkDistancePepeEndboss() || (this.checkIfEndbossMoved() && this.energy > 0)) {
 				this.moveLeft();
 			}
 		}, 1000 / 60);
+		allIntervals.push(this.endbossMovementInverval);
 	}
 
 	/**

@@ -5,8 +5,8 @@ class miniChicken extends MovableObject {
 	offset = {
 		top: 5,
 		bottom: 5,
-		left: 5,
-		right: 5,
+		left: 20,
+		right: 20,
 	};
 	energy = 2;
 	CHICKEN_SMALL_WALKING = [
@@ -35,23 +35,25 @@ class miniChicken extends MovableObject {
 	 * The interval checks whether the chicken is still alive and running to the left
 	 */
 	minichickenMovement() {
-		setInterval(() => {
+		this.minichickenMovementInterval = setInterval(() => {
 			if (!this.isDead()) {
 				this.moveLeft();
 			}
 		}, 1000 / 60);
+		allIntervals.push(this.minichickenMovementInterval);
   }
   
 	/**
 	 * The interval checks whether the chicken is still alive and plays the appropriate animation
 	 */
 	animate() {
-		setInterval(() => {
+		this.minichickenAnimate = setInterval(() => {
 			if (this.isDead()) {
 				this.playAnimation(this.CHICKEN_SMALL_DEAD);
 			} else {
 				this.playAnimation(this.CHICKEN_SMALL_WALKING);
 			}
 		}, 100);
+		allIntervals.push(this.minichickenAnimate);
 	}
 }

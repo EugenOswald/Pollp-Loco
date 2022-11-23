@@ -68,24 +68,26 @@ class MovableObject extends DrawableObject {
 	 * Gravity to the right
 	 */
 	applyGravaity() {
-		setInterval(() => {
+		applyGravaityInterval = setInterval(() => {
 			if (this.isAboveGround() || this.speedY > 0) {
 				this.y -= this.speedY;
 				this.speedY -= this.acceleration;
 			}
 		}, 1000 / 25);
+		allIntervals.push(this.applyGravaityInterval);
 	}
 
 	/**
 	 * Gravity to the left
 	 */
 	applyGravaityOtherDirection() {
-		setInterval(() => {
+		applyGravaityOtherDirectionInterval = setInterval(() => {
 			if (this.isAboveGround() || this.speedY < 0) {
 				this.y += this.speedY;
 				this.speedY += this.acceleration;
 			}
 		}, 1000 / 25);
+		allIntervals.push(this.applyGravaityOtherDirectionInterval);
 	}
 
 	/**
@@ -146,6 +148,6 @@ class MovableObject extends DrawableObject {
 	 * Jump in the air
 	 */
 	jump() {
-		this.speedY = 25;
+		this.speedY = 35;
 	}
 }

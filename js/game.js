@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 let game_over_sound = new Audio("audio/game-over.mp3");
 let game_winner_sound = new Audio("audio/you-win.mp3");
 let gameFinish = false;
+let allIntervals = [];
 
 /**
  *  Starts the game and initiates the levels
@@ -12,6 +13,8 @@ function startGame() {
 	document.getElementById("canvas").classList.remove("d-none");
 	document.getElementById("muteButton").classList.remove("d-none");
 	document.getElementById("fullscreenButton").classList.remove("d-none");
+	document.getElementById("buttonsLeft").classList.remove("d-none");
+	document.getElementById("buttonsRight").classList.remove("d-none");
 	document.getElementById("startScreen").classList.add("d-none");
 	initLevel();
 	init();
@@ -52,6 +55,8 @@ function gameWinnerScreen() {
 		document.getElementById("muteButton").classList.add("d-none");
 		document.getElementById("canvas").classList.add("d-none");
 		document.getElementById("endMuteButton").classList.add("d-none");
+		document.getElementById("buttonsLeft").classList.add("d-none");
+		document.getElementById("buttonsRight").classList.add("d-none");
 		document.getElementById("gameWinnerScreen").classList.remove("d-none");
 		gameFinish = true;
 	}
@@ -68,8 +73,11 @@ function gameOverScreen() {
 		document.getElementById("fullscreenButton").classList.add("d-none");
 		document.getElementById("muteButton").classList.add("d-none");
 		document.getElementById("canvas").classList.add("d-none");
+		document.getElementById("buttonsLeft").classList.add("d-none");
+		document.getElementById("buttonsRight").classList.add("d-none");
 		document.getElementById("endMuteButton").classList.add("d-none");
 		document.getElementById("gameOverScreen").classList.remove("d-none");
+		world.clearcanvas();
 		gameFinish = true;
 	}
 }
@@ -78,7 +86,18 @@ function gameOverScreen() {
  * reloads the page
  */
 function backToStartScreen() {
-	location.reload();
+	allIntervals.forEach(clearInterval);
+	world.resetGame();
+	keyboard.MUTE = false;
+	document.getElementById("canvas").classList.add("d-none");
+	document.getElementById("muteButton").classList.add("d-none");
+	document.getElementById("fullscreenButton").classList.add("d-none");
+	document.getElementById("gameOverScreen").classList.add("d-none");
+	document.getElementById("buttonsLeft").classList.add("d-none");
+	document.getElementById("buttonsRight").classList.add("d-none");
+	document.getElementById("gameWinnerScreen").classList.add("d-none");
+	document.getElementById("startScreen").classList.remove("d-none");
+	gameFinish = false;
 }
 
 /**
@@ -158,6 +177,7 @@ function simulateKeyPressed(keyCode, type) {
 	document.dispatchEvent(e);
 
 	// -------------------------KEYDOWN----------------------
+
 	if (e.keyCode == 39 && type == "keydown") {
 		keyboard.RIGHT = true;
 	}
@@ -174,7 +194,7 @@ function simulateKeyPressed(keyCode, type) {
 		keyboard.RIGHT = true;
 	}
 	if (e.keyCode == 13 && type == "keydown") {
-		keyboard.ENTE = true;
+		keyboard.ENTER = true;
 	}
 	// -------------------------KEYUP----------------------
 	if (e.keyCode == 39 && type == "keyup") {
@@ -193,7 +213,7 @@ function simulateKeyPressed(keyCode, type) {
 		keyboard.RIGHT = false;
 	}
 	if (e.keyCode == 13 && type == "keyup") {
-		keyboard.ENTE = false;
+		keyboard.ENTER = false;
 	}
 }
 

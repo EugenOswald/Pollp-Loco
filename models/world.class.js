@@ -42,25 +42,27 @@ class World {
 	 * checks if mute is false or true
 	 */
 	isMuted() {
-		setInterval(() => {
+		isMutedIntervall = setInterval(() => {
 			if (keyboard.MUTE == false) {
 				this.muted = false;
 			} else if (keyboard.MUTE == true) {
 				this.muted = true;
 			}
 		}, 1000 / 60);
+		allIntervals.push(this.isMutedIntervall);
 	}
 
 	/**
 	 * In the interval, all collisions are made queries
 	 */
 	collectObjects() {
-		setInterval(() => {
+		collectObjectsInterval = setInterval(() => {
 			this.checkCollectCoin();
 			this.checkCollectBottle();
 			this.checkCollisionThrowObject();
 			this.checkCollisions();
 		}, 50);
+		allIntervals.push(this.collectObjectsInterval);
 	}
 
 	/**
@@ -103,12 +105,13 @@ class World {
 	 * Checks if something is thrown, if the game is muted, if the background music is still playing and if the game is over.
 	 */
 	run() {
-		setInterval(() => {
+		runInterval = setInterval(() => {
 			this.checkThrowObjects();
 			this.isMuted();
 			this.backgroundMusic();
 			this.checkGameEnd();
 		}, 100);
+		allIntervals.push(this.runInterval);
 	}
 
 	/**
@@ -213,7 +216,7 @@ class World {
 	 * Collisions with enemies with the boss and with enemies from above are checked
 	 */
 	checkCollisions() {
-		setInterval(() => {
+		checkCollisionsIntervall = setInterval(() => {
 			this.level.enemies.forEach((enemy, indexEnemy) => {
 				if (this.aboutGroundCollideEnemies(enemy, indexEnemy)) {
 					this.killingHeadJump(indexEnemy);
@@ -228,6 +231,7 @@ class World {
 				}
 			});
 		}, 50);
+		allIntervals.push(this.checkCollisionsIntervall);
 	}
 
 	/**
@@ -261,7 +265,7 @@ class World {
 			this.character.isAboveGround() &&
 			this.character.isColliding(enemy) &&
 			this.isNotEndboss(enemy, indexEnemy) &&
-			this.level.enemies[indexEnemy].energy > 1
+			this.level.enemies[indexEnemy].energy > 1 && this.character.y < 200
 		);
 	}
 
@@ -319,6 +323,9 @@ class World {
 		});
 	}
 
+	clearcanvas() {
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	}
 	/**
 	 * Adds an Array of Objects to the canvas
 	 * @param {Array} objects - Array which contains objects
@@ -339,7 +346,7 @@ class World {
 			this.flipImage(movableObject);
 		}
 		movableObject.draw(this.ctx);
-		// movableObject.drawFrame(this.ctx);
+		movableObject.drawFrame(this.ctx);
 
 		if (movableObject.otherDirection) {
 			this.flipImageBack(movableObject); // Mit dieser Function wird die dier Spiegelung rückgängig gemacht
@@ -378,12 +385,19 @@ class World {
 	 * Checks in the interval whether the boss has 0 life or the character
 	 */
 	checkGameEnd() {
-		setInterval(() => {
+		checkGameEndInterval = setInterval(() => {
 			if (this.level.enemies[6].energy <= 0) {
 				gameWinnerScreen();
 			} else if (world.character.energy <= 0) {
 				gameOverScreen();
 			}
 		}, 200);
+		allIntervals.push(this.checkGameEndInterval);
+	}
+
+	resetGame() {
+		this.throwableObjects = [];
+		this.collectedBottles = [];
+		this.collectedCoins = [];
 	}
 }

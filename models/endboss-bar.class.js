@@ -30,7 +30,8 @@ class EndbossBar extends DrawableObject {
 	 * The image is deposited how much live the final boss has
 	 */
 	setBottlebar() {
-		setInterval(() => {
+		
+		this.setBottlebarInvertval = setInterval(() => {
 			if (world.level.enemies[6].energy >= 100) {
 				this.loadImage(this.IMAGES_BOSSHEALTH[5]);
 			} else if (world.level.enemies[6].energy >= 80) {
@@ -45,5 +46,6 @@ class EndbossBar extends DrawableObject {
 				this.loadImage(this.IMAGES_BOSSHEALTH[0]);
 			}
 		}, 100);
+		allIntervals.push(this.setBottlebarInvertval);
 	}
 }

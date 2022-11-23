@@ -71,36 +71,41 @@ class ThrowableObjects extends MovableObject {
 	 * Throw animation to the left
 	 */
 	throwLeftAnimation() {
-		setInterval(() => {
+		throwLeftAnimationInterval1 = setInterval(() => {
 			this.playAnimation(this.BOTTLE_ROTATION);
 		}, 150);
+		allIntervals.push(this.throwLeftAnimationInterval1);
 		this.speedY = -18;
 		this.applyGravaityOtherDirection();
-		setInterval(() => {
+		throwLeftAnimationInterval2 = setInterval(() => {
 			this.x -= 5;
 		}, 1000 / 60);
+		allIntervals.push(this.throwLeftAnimationInterval2);
 	}
 
 	/**
 	 * Throw animation to the right
 	 */
 	throwRightAnimation() {
-		setInterval(() => {
+		throwRightAnimationInterval1 = setInterval(() => {
 			this.playAnimation(this.BOTTLE_ROTATION);
 		}, 150);
+		allIntervals.push(this.throwRightAnimationInterval1);
 		this.speedY = 18;
 		this.applyGravaity();
-		setInterval(() => {
+		throwRightAnimationInterval2 = setInterval(() => {
 			this.x += 5;
 		}, 1000 / 60);
+		allIntervals.push(this.throwRightAnimationInterval2);
 	}
 
 	/**
 	 * Animation of a broken sleep
 	 */
 	splashAnimation() {
-		setInterval(() => {
+		splashAnimationIntervall = setInterval(() => {
 			this.playAnimation(this.BOTTLE_SPLASH);
 		}, 5);
+		allIntervals.push(this.splashAnimationIntervall);
 	}
 }

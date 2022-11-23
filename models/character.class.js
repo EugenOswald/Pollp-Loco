@@ -87,7 +87,7 @@ class Character extends MovableObject {
 	 * Checks where the character is moving to in an interval
 	 */
 	pepeMovement() {
-		setInterval(() => {
+		this.pepeMovementInterval = setInterval(() => {
 			this.walking_sound.pause();
 			if (this.keyboardRight()) {
 				this.characterRightMovement();
@@ -100,13 +100,14 @@ class Character extends MovableObject {
 			}
 			this.cameraFollowCharacter();
 		}, 1000 / 60);
+		allIntervals.push(this.pepeMovementInterval);
 	}
 
 	/**
 	 * Checks in the interval what the character is doing to play the appropriate animations
 	 */
 	animate() {
-		setInterval(() => {
+		this.animatonCharacterInterval = setInterval(() => {
 			if (this.isDead()) {
 				this.playAnimation(this.IMAGES_DEAD);
 			} else if (this.isHurt()) {
@@ -119,6 +120,7 @@ class Character extends MovableObject {
 				this.pepeSleepingWaitingAnimations();
 			}
 		}, 100);
+		allIntervals.push(this.animatonCharacterInterval);
 	}
 
 	/**
@@ -144,11 +146,12 @@ class Character extends MovableObject {
 	 * Checks the last interaction with pepe
 	 */
 	pepeStandingStill() {
-		setInterval(() => {
+		this.pepeStandingStillIntervall =setInterval(() => {
 			if (this.noInteractionsWithPepe()) {
 				this.lastPepeAction = new Date().getTime();
 			}
 		}, 100);
+		allIntervals.push(this.pepeStandingStillIntervall);
 	}
 
 	/**

@@ -25,20 +25,9 @@ class CoinBar extends DrawableObject {
 	 * The image is deposited, how long the array of collectedCoins is
 	 */
 	setCoinbar() {
-		setInterval(() => {
-			if (world.collectedCoins.length >= 10) {
-				this.loadImage(this.IMAGES_COIN_BAR[5]);
-			} else if (world.collectedCoins.length >= 8) {
-				this.loadImage(this.IMAGES_COIN_BAR[4]);
-			} else if (world.collectedCoins.length >= 6) {
-				this.loadImage(this.IMAGES_COIN_BAR[3]);
-			} else if (world.collectedCoins.length >= 4) {
-				this.loadImage(this.IMAGES_COIN_BAR[2]);
-			} else if (world.collectedCoins.length >= 2) {
-				this.loadImage(this.IMAGES_COIN_BAR[1]);
-			} else {
-				this.loadImage(this.IMAGES_COIN_BAR[0]);
-			}
+		this.setCoinbarInterval = setInterval(() => {
+			super.setBar(world.collectedCoins.length, this.IMAGES_COIN_BAR);
 		}, 100);
+		allIntervals.push(this.setCoinbarInterval);
 	}
 }

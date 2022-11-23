@@ -34,21 +34,24 @@
 
 <body>
   <h1>El Pollo Loco</h1>
-  <div class="rotate"><img src="/img/10_icons/rotate-phone.gif" alt="" srcset=""></div>
+  <div class="rotate"><img src="./img/10_icons/rotate-phone.gif" alt="" srcset=""></div>
 
-  <div id="fullscreen" class="gameBoard">
-    <div class="buttonContainer">
-      <button onmousedown="simulateKeyPressed(37,'keydown')" onmouseup="simulateKeyPressed(37,'keyup')"><i
+
+  <div class="canvasScreen" id="fullscreen">
+    <div class="buttonContainerLeft d-none" id="buttonsLeft">
+      <button onmousedown="simulateKeyPressed(37,'keydown')" onmouseup="simulateKeyPressed(37,'keyup')"
+        ontouchstart="simulateKeyPressed(37,'keydown')" ontouchend="simulateKeyPressed(37,'keyup')"><i
           class="fa-solid fa-circle-left"></i></button>
-      <button onmousedown="simulateKeyPressed(32,'keydown')" onmouseup="simulateKeyPressed(32,'keyup')"><i
-          class="fa-solid fa-turn-up"></i></button>
+      <button onmousedown="simulateKeyPressed(32,'keydown')" onmouseup="simulateKeyPressed(32,'keyup')"
+        ontouchstart="simulateKeyPressed(32,'keydown')" ontouchend="simulateKeyPressed(32,'keyup')">
+        <i class="fa-solid fa-turn-up"></i></button>
     </div>
-    <div>
+    <div class="flexJust">
       <div class="start-screen" id="startScreen">
         <button class="btn-style" onclick="startGame()">START GAME</button>
         <button class="btn-style" onclick="openHowToPlay()">HOW TO PLAY</button>
         <!-- <button class="btn-style">EXAMPLE VIDEO</button> -->
-        <div id="mainHTP" class="backdrop d-none">
+        <div onclick="closeHowToPlay()" id="mainHTP" class="backdrop d-none">
           <div class="how-to-play">
             <i onclick="closeHowToPlay()" class="fa-solid fa-circle-xmark top-right"></i>
             <h3>HOW TO PLAY</h3>
@@ -71,7 +74,6 @@
           </div>
         </div>
       </div>
-
       <div class="game-over-screen d-none" id="gameOverScreen">
         <button class="btn-style" onclick="backToStartScreen()">MAIN MENU</button>
       </div>
@@ -79,23 +81,24 @@
         <h2>YOU ARE A WINNER!</h2>
         <button class="btn-style" onclick="backToStartScreen()">MAIN MENU</button>
       </div>
-      <div class="canvasScreen">
-        <img id="muteButton" class="muteIcon d-none" src="./img/10_icons/volume-up-4-128.ico" onclick="muteGame()" />
-        <img id="fullscreenButton" class="fullscreenIcon d-none" src="./img/10_icons/fullscreen-12-128.ico"
-          onclick="fullscreenGame()" />
-        <img id="endMuteButton" class="muteIcon d-none" src="./img/10_icons/mute-2-128.ico" onclick="endMuteGame()" />
-        <img id="endFullscreen" class="fullscreenIcon d-none" src="./img/10_icons/fit-to-width-128.ico"
-          onclick="endFullscreenGame()" />
-        <canvas id="canvas" class="d-none" width="720" height="480"> </canvas>
-      </div>
+      <img id="muteButton" class="muteIcon d-none" src="./img/10_icons/volume-up-4-128.ico" onclick="muteGame()" />
+      <img id="fullscreenButton" class="fullscreenIcon d-none" src="./img/10_icons/fullscreen-12-128.ico"
+        onclick="fullscreenGame()" />
+      <img id="endMuteButton" class="muteIcon d-none" src="./img/10_icons/mute-2-128.ico" onclick="endMuteGame()" />
+      <img id="endFullscreen" class="fullscreenIcon d-none" src="./img/10_icons/fit-to-width-128.ico"
+        onclick="endFullscreenGame()" />
+      <canvas id="canvas" class="d-none" width="720" height="480"> </canvas>
     </div>
-    <div class="buttonContainer">
-      <button onmousedown="simulateKeyPressed(39,'keydown')" onmouseup="simulateKeyPressed(39,'keyup')"><i
+    <div class="buttonContainerRight d-none" id="buttonsRight">
+      <button onmousedown="simulateKeyPressed(39,'keydown')" onmouseup="simulateKeyPressed(39,'keyup')"
+        ontouchstart="simulateKeyPressed(39,'keydown')" ontouchend="simulateKeyPressed(39,'keyup')"><i
           class="fa-solid fa-circle-right"></i></button>
       <button onmousedown="simulateKeyPressed(13,'keydown')" onmouseup="simulateKeyPressed(13,'keyup')"><i
           class="fa-solid fa-bottle-droplet"></i></button>
     </div>
   </div>
+
+
 </body>
 
 </html>

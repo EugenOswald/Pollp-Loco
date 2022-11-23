@@ -5,8 +5,8 @@ class Chicken extends MovableObject {
 	offset = {
 		top: 5,
 		bottom: 5,
-		left: 5,
-		right: 5,
+		left: 25,
+		right: 25,
 	};
 	isChickenDeath = false;
 	energy = 2;
@@ -36,12 +36,12 @@ class Chicken extends MovableObject {
 	 * The interval checks whether the chicken is still alive and running to the left
 	 */
 	chickenMovement() {
-		setInterval(() => {
+		this.chickenMovementInterval = setInterval(() => {
 			if (!this.isDead()) {
 				this.moveLeft();
-				
 			} else this.playDeathSound();
 		}, 1000 / 60);
+		allIntervals.push(this.chickenMovementInterval);
 	}
 
 	/**
@@ -61,12 +61,13 @@ class Chicken extends MovableObject {
 	 * The interval checks whether the chicken is still alive and plays the appropriate animation
 	 */
 	animate() {
-		setInterval(() => {
+		this.chickenAnimateInterval = setInterval(() => {
 			if (this.isDead()) {
 				this.playAnimation(this.CHICKEN_DEAD);
 			} else {
 				this.playAnimation(this.CHICKEN_WALKING);
 			}
 		}, 100);
+			allIntervals.push(this.chickenAnimateInterval);
 	}
 }
