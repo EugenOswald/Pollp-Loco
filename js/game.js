@@ -47,6 +47,7 @@ function init() {
  */
 function gameWinnerScreen() {
 	if (gameFinish == false) {
+		world.background_sound.pause();
 		allIntervals.forEach(clearInterval);
 		keyboard.MUTE = true;
 		game_winner_sound.play();
@@ -68,6 +69,7 @@ function gameWinnerScreen() {
  */
 function gameOverScreen() {
 	if (gameFinish == false) {
+		world.background_sound.pause();
 		allIntervals.forEach(clearInterval);
 		keyboard.MUTE = true;
 		game_over_sound.play();
@@ -216,6 +218,7 @@ function simulateKeyPressed(keyCode, type) {
 	if (e.keyCode == 13 && type == "keyup") {
 		keyboard.ENTER = false;
 	}
+	
 }
 
 /**
@@ -240,6 +243,7 @@ window.addEventListener("keydown", (e) => {
 	if (e.keyCode == 13) {
 		keyboard.ENTER = true;
 	}
+	console.log(e.keyCode);
 });
 
 /**

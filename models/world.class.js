@@ -399,5 +399,6 @@ class World {
 		this.throwableObjects = [];
 		this.collectedBottles = [];
 		this.collectedCoins = [];
+		
 	}
 }
