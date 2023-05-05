@@ -13,6 +13,7 @@ class World {
 	coinBar = new CoinBar();
 	throwableObjects = [];
 	collectedBottles = [];
+	brockenBottle = [];
 	collectedCoins = [];
 	muted = false;
 	collisionTimepassed;
@@ -61,7 +62,7 @@ class World {
 			this.checkCollectBottle();
 			this.checkCollisionThrowObject();
 			this.checkCollisions();
-		}, 50);
+		}, 1000 / 50);
 		allIntervals.push(this.collectObjectsInterval);
 	}
 
@@ -109,7 +110,7 @@ class World {
 			this.isMuted();
 			this.backgroundMusic();
 			this.checkGameEnd();
-		}, 100);
+		}, 150);
 		allIntervals.push(this.runInterval);
 	}
 
@@ -127,10 +128,12 @@ class World {
 	 * If there is a bottle in the array, a bottle should be thrown from the character
 	 */
 	checkThrowObjects() {
-		if (this.pressEnterAndArrayLength()) {
-			let bottle = new ThrowableObjects(this.character.x + 10, this.character.y + 100);
-			this.throwableObjects.push(bottle);
-		}
+		setTimeout(() => {
+			if (this.pressEnterAndArrayLength()) {
+				let bottle = new ThrowableObjects(this.character.x + 10, this.character.y + 100);
+				this.throwableObjects.push(bottle);
+			}
+		}, 500);
 	}
 
 	/**
@@ -150,16 +153,25 @@ class World {
 				if (this.bottleHitsGround(indexBottle)) {
 					this.setCollidingTime();
 					this.throwableObjects[indexBottle].splashAnimation();
-					this.brokenBottleSound();
+					this.brockenBottleSplice();
 				}
 				if (this.bottleHitsEnemy(enemy, indexBottle)) {
 					this.setCollidingTime();
 					this.level.enemies[indexEnemy].hit();
-					this.brokenBottleSound();
 					this.throwableObjects[indexBottle].splashAnimation();
+					this.brockenBottleSplice();
 				}
 			});
 		});
+	}
+
+	brockenBottleSplice() {
+
+		this.brokenBottleSound();
+		this.spliceTimeout = setTimeout(() => {
+			world.throwableObjects.splice(0, 1);
+			clearTimeout(spliceTimeout);
+		}, 500);
 	}
 
 	/**
@@ -336,7 +348,7 @@ class World {
 			this.flipImage(movableObject);
 		}
 		movableObject.draw(this.ctx);
-		movableObject.drawFrame(this.ctx);
+		// movableObject.drawFrame(this.ctx);
 
 		if (movableObject.otherDirection) {
 			this.flipImageBack(movableObject);

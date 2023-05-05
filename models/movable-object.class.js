@@ -5,7 +5,7 @@ class MovableObject extends DrawableObject {
 	acceleration = 2;
 	lastHit = 0;
 	reJump_sound = new Audio("audio/rejump.mp3");
-	energy = 500;
+	energy = 1000;
 	offset = {
 		top: 0,
 		bottom: 0,

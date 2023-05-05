@@ -24,47 +24,47 @@ class DrawableObject {
 		ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 	}
 
-	/**
-	 * Draws a frame around the special objects
-	 * @param {string} ctx - Context of our Canvas 2D or 3D
-	 */
-	drawFrame(ctx) {
-		// Alle Objekte einen Rand geben
-		if (
-			this instanceof Character ||
-			this instanceof Chicken ||
-			this instanceof miniChicken ||
-			this instanceof Endboss ||
-			this instanceof Coin ||
-			this instanceof Bottle ||
-			this instanceof ThrowableObjects
-		) {
-			// Only these specified classes receive a boarder
-			ctx.beginPath();
-			ctx.lineWidth = "1";
-			ctx.strokeStyle = "blue";
-			ctx.rect(this.x, this.y, this.width, this.height);
-			ctx.stroke();
-			this.drawOffset(ctx);
-		}
-	}
+	// /**
+	//  * Draws a frame around the special objects
+	//  * @param {string} ctx - Context of our Canvas 2D or 3D
+	//  */
+	// drawFrame(ctx) {
+	// 	// Alle Objekte einen Rand geben
+	// 	if (
+	// 		this instanceof Character ||
+	// 		this instanceof Chicken ||
+	// 		this instanceof miniChicken ||
+	// 		this instanceof Endboss ||
+	// 		this instanceof Coin ||
+	// 		this instanceof Bottle ||
+	// 		this instanceof ThrowableObjects
+	// 	) {
+	// 		// Only these specified classes receive a boarder
+	// 		ctx.beginPath();
+	// 		ctx.lineWidth = "1";
+	// 		ctx.strokeStyle = "blue";
+	// 		ctx.rect(this.x, this.y, this.width, this.height);
+	// 		ctx.stroke();
+	// 		this.drawOffset(ctx);
+	// 	}
+	// }
 
-	/**
-	 * Draws an offset frame around the special objects
-	 * @param {string} ctx - Context of our Canvas 2D or 3D
-	 */
-	drawOffset(ctx) {
-		ctx.beginPath();
-		ctx.lineWidth = "1";
-		ctx.strokeStyle = "red";
-		ctx.rect(
-			this.x + this.offset.left,
-			this.y + this.offset.top,
-			this.width - this.offset.left - this.offset.right,
-			this.height - this.offset.top - this.offset.bottom
-		);
-		ctx.stroke();
-	}
+	// /**
+	//  * Draws an offset frame around the special objects
+	//  * @param {string} ctx - Context of our Canvas 2D or 3D
+	//  */
+	// drawOffset(ctx) {
+	// 	ctx.beginPath();
+	// 	ctx.lineWidth = "1";
+	// 	ctx.strokeStyle = "red";
+	// 	ctx.rect(
+	// 		this.x + this.offset.left,
+	// 		this.y + this.offset.top,
+	// 		this.width - this.offset.left - this.offset.right,
+	// 		this.height - this.offset.top - this.offset.bottom
+	// 	);
+	// 	ctx.stroke();
+	// }
 
 	/**
 	 * Creates many new Image-Objects, gives them an Image-Path and stores them in 'this.imageCache'

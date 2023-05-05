@@ -146,7 +146,7 @@ class Character extends MovableObject {
 	 * Checks the last interaction with pepe
 	 */
 	pepeStandingStill() {
-		this.pepeStandingStillIntervall =setInterval(() => {
+		this.pepeStandingStillIntervall = setInterval(() => {
 			if (this.noInteractionsWithPepe()) {
 				this.lastPepeAction = new Date().getTime();
 			}
@@ -178,6 +178,8 @@ class Character extends MovableObject {
 		this.otherDirection = false;
 		if (world.muted == false) {
 			this.walking_sound.play();
+		} else {
+			this.walking_sound.pause();
 		}
 	}
 
@@ -190,6 +192,8 @@ class Character extends MovableObject {
 		this.otherDirection = true;
 		if (world.muted == false) {
 			this.walking_sound.play();
+		} else {this.walking_sound.pause();
+
 		}
 	}
 	/**
