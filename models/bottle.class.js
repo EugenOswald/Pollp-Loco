@@ -14,9 +14,9 @@ class Bottle extends MovableObject {
 	 *  using 'loadImage()' of the super constructor
 	 */
 	constructor() {
-		super().loadImage(this.BOTTLE_IMAGE[0]);
-		this.loadImages(this.BOTTLE_IMAGE);
-		this.y = 360;
-		this.x = Math.random() * 4 * 400;
+		super().loadImage(this.BOTTLE_IMAGE[0]); // Aufruf der Methode loadImage des übergeordneten Konstruktors
+        this.x = 100 + Math.random() * 4 * 400; // Zufällige X-Position für die Flasche
+        this.y = 360; // Feste Y-Position für die Flasche
+    
 	}
 }

@@ -1,6 +1,6 @@
 @font-face {
-	font-family: "zabars";
-	src: url("./fonts/zabars.ttf") format("truetype");
+	font-family: 'zabars';
+	src: url('./fonts/zabars.ttf') format('truetype');
 }
 
 body {
@@ -10,8 +10,8 @@ body {
 	align-items: center;
 	height: 100vh;
 	margin: 0;
-	font-family: "zabars", Arial, Helvetica, sans-serif;
-	background-image: url("img/5_background/website_background.png");
+	font-family: 'zabars', Arial, Helvetica, sans-serif;
+	background-image: url('img/5_background/website_background.png');
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -28,6 +28,7 @@ canvas {
 	background-color: black;
 	-webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.1);
 	box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+	border-radius: 20px;
 }
 
 .flexJust {
@@ -52,9 +53,10 @@ canvas {
 	align-items: center;
 	flex-direction: column;
 	background-size: cover;
-	background-image: url("img/9_intro_outro_screens/start/startscreen_1.png");
+	background-image: url('img/9_intro_outro_screens/start/startscreen_1.png');
 	width: 720px;
 	height: 480px;
+	border-radius: 20px;
 	background-repeat: no-repeat;
 	background-position: center right;
 }
@@ -63,7 +65,7 @@ canvas {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-family: "zabars", Arial, Helvetica, sans-serif;
+	font-family: 'zabars', Arial, Helvetica, sans-serif;
 	width: 300px;
 	height: 50px;
 	border-radius: 5px;
@@ -84,10 +86,11 @@ canvas {
 	align-items: center;
 	flex-direction: column;
 	background-size: contain;
-	background-image: url("img/9_intro_outro_screens/game_over/game over.png");
+	background-image: url('img/9_intro_outro_screens/game_over/game over.png');
 	width: 720px;
 	height: 480px;
 	background-position: center right;
+	border-radius: 20px;
 }
 
 .game-winner-screen {
@@ -96,7 +99,7 @@ canvas {
 	align-items: center;
 	flex-direction: column;
 	background-size: cover;
-	background-image: url("img/9_intro_outro_screens/start/startscreen_2.png");
+	background-image: url('img/9_intro_outro_screens/start/startscreen_2.png');
 	width: 720px;
 	height: 480px;
 	background-position: center right;
@@ -114,9 +117,10 @@ canvas {
 	justify-content: center;
 	position: relative;
 	background-image: url(img/5_background/website_background.png);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 20px;
 }
 
 .canvasScreen img {
@@ -264,8 +268,7 @@ canvas {
 }
 
 @media only screen and (max-width: 860px) {
-
-	body{
+	body {
 		justify-content: center;
 	}
 

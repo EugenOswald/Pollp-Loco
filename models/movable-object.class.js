@@ -4,7 +4,7 @@ class MovableObject extends DrawableObject {
 	speedY = 0;
 	acceleration = 2;
 	lastHit = 0;
-	reJump_sound = new Audio("audio/rejump.mp3");
+	reJump_sound = new Audio('audio/rejump.mp3');
 	energy = 1000;
 	offset = {
 		top: 0,
@@ -51,8 +51,8 @@ class MovableObject extends DrawableObject {
 	 * @returns past time
 	 */
 	isHurt() {
-		let timepassed = new Date().getTime() - this.lastHit; 
-		timepassed = timepassed / 1000; 
+		let timepassed = new Date().getTime() - this.lastHit;
+		timepassed = timepassed / 1000;
 		return timepassed < 1;
 	}
 
@@ -111,7 +111,7 @@ class MovableObject extends DrawableObject {
 		return (
 			this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
 			this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
-			this.x + this.offset.left < mo.x + mo.width - mo.offset.right && 
+			this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
 			this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
 		); // B => T
 	}
@@ -136,7 +136,7 @@ class MovableObject extends DrawableObject {
 	 * @param {string} images  Array with contains paths of images
 	 */
 	playAnimation(images) {
-		let i = this.currentImage % images.length; 
+		let i = this.currentImage % images.length;
 		let path = images[i];
 		this.img = this.imageCashe[path];
 		this.currentImage++;

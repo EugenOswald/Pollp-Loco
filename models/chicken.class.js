@@ -1,7 +1,7 @@
 class Chicken extends MovableObject {
-	y = 360;
-	width = 60;
-	height = 60;
+	y = 340;
+	width = 80;
+	height = 80;
 	offset = {
 		top: 5,
 		bottom: 5,
@@ -26,7 +26,7 @@ class Chicken extends MovableObject {
 		super().loadImage(this.CHICKEN_WALKING[0]);
 		this.loadImages(this.CHICKEN_WALKING);
 		this.loadImages(this.CHICKEN_DEAD);
-		this.x = 1000 + Math.random() * 800; 
+		this.x = 600 + Math.random() * 800; 
 		this.speed = 0.7 + Math.random() * 0.5;
 		this.animate();
 		this.chickenMovement();

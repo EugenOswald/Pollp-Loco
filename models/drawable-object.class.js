@@ -74,24 +74,13 @@ class DrawableObject {
 		array.forEach((path) => {
 			let img = new Image();
 			img.src = path;
-			img.style = "transform: scaleX(-1)";
+			img.style = 'transform: scaleX(-1)';
 			this.imageCashe[path] = img;
 		});
 	}
 
 	setBar(array, imageBar) {
-		if (array >= 10) {
-			this.loadImage(imageBar[5]);
-		} else if (array >= 8) {
-			this.loadImage(imageBar[4]);
-		} else if (array >= 6) {
-			this.loadImage(imageBar[3]);
-		} else if (array >= 4) {
-			this.loadImage(imageBar[2]);
-		} else if (array >= 2) {
-			this.loadImage(imageBar[1]);
-		} else {
-			this.loadImage(imageBar[0]);
-		}
+		const index = Math.min(Math.floor(array / 2), imageBar.length - 1);
+		this.loadImage(imageBar[index]);
 	}
 }

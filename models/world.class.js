@@ -18,10 +18,10 @@ class World {
 	muted = false;
 	collisionTimepassed;
 	lastCollision;
-	background_sound = new Audio("audio/music.mp3");
-	coin_sound = new Audio("audio/coin.mp3");
-	broken_bottle_sound = new Audio("audio/broken-bottle.mp3");
-	kill_chicken_sound = new Audio("audio/chicken.mp3");
+	background_sound = new Audio('audio/music.mp3');
+	coin_sound = new Audio('audio/coin.mp3');
+	broken_bottle_sound = new Audio('audio/broken-bottle.mp3');
+	kill_chicken_sound = new Audio('audio/chicken.mp3');
 
 	/**
 	 *As soon as a World-Object gets created the context of the canvas gets defined,
@@ -30,7 +30,7 @@ class World {
 	 * @param {object} keyboard -Keyboard-Object
 	 */
 	constructor(canvas, keyboard) {
-		this.ctx = canvas.getContext("2d");
+		this.ctx = canvas.getContext('2d');
 		this.canvas = canvas;
 		this.keyboard = keyboard;
 		this.draw();
@@ -128,12 +128,14 @@ class World {
 	 * If there is a bottle in the array, a bottle should be thrown from the character
 	 */
 	checkThrowObjects() {
-		setTimeout(() => {
-			if (this.pressEnterAndArrayLength()) {
-				let bottle = new ThrowableObjects(this.character.x + 10, this.character.y + 100);
-				this.throwableObjects.push(bottle);
-			}
-		}, 500);
+		if (this.pressEnterAndArrayLength()) {
+			this.throwBottle();
+		}
+	}
+
+	throwBottle() {
+		let bottle = new ThrowableObjects(this.character.x + 10, this.character.y + 100);
+		this.throwableObjects.push(bottle);
 	}
 
 	/**
@@ -166,11 +168,9 @@ class World {
 	}
 
 	brockenBottleSplice() {
-
 		this.brokenBottleSound();
-		this.spliceTimeout = setTimeout(() => {
-			world.throwableObjects.splice(0, 1);
-			clearTimeout(spliceTimeout);
+		setTimeout(() => {
+			this.throwableObjects.shift();
 		}, 500);
 	}
 
@@ -232,10 +232,6 @@ class World {
 				if (this.aboutGroundCollideEnemies(enemy, indexEnemy)) {
 					this.killingHeadJump(indexEnemy);
 					this.level.enemies[indexEnemy].energy = 0;
-				} else if (this.collideEndboss(enemy, indexEnemy)) {
-					this.character.hitsBack();
-					this.character.hit();
-					this.healthBar.setPercentage(this.character.energy);
 				} else if (this.collideEnemy(enemy, indexEnemy)) {
 					this.character.hit();
 					this.healthBar.setPercentage(this.character.energy);
@@ -248,21 +244,11 @@ class World {
 	/**
 	 * checks collision with an enemy
 	 * @param {Object} enemy - Enemy
-	 * @param {Number} indexEnemy - Index of Enemys
+	 * @param {Number} indexEnemy - Index of Enemies
 	 * @returns true or false
 	 */
 	collideEnemy(enemy, indexEnemy) {
-		return this.character.isColliding(enemy) && this.level.enemies[indexEnemy].energy > 0;
-	}
-
-	/**
-	 * checks collision with the boss
-	 * @param {Object} enemy - Enemy
-	 * @param {Number} indexEnemy - Index of Enemys
-	 * @returns true or false
-	 */
-	collideEndboss(enemy, indexEnemy) {
-		return this.character.isColliding(this.level.enemies[6]) && this.level.enemies[indexEnemy].energy > 0;
+		return this.character.isColliding(enemy) && enemy.energy > 0;
 	}
 
 	/**
@@ -379,7 +365,7 @@ class World {
 	 * Context has to be cleared before each new drawing
 	 */
 	clearRect() {
-		let context = canvas.getContext("2d");
+		let context = canvas.getContext('2d');
 		context.clearRect(0, 0, canvas.width, canvas.height);
 	}
 

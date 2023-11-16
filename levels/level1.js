@@ -55,7 +55,7 @@ function createBackgrounds() {
  * @returns an Obcejt
  */
 function createClouds() {
-	return [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()];
+	return [new Cloud(), new Cloud()];
 }
 
 /**
