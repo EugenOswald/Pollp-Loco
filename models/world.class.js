@@ -375,9 +375,9 @@ class World {
 	checkGameEnd() {
 		this.checkGameEndInterval = setInterval(() => {
 			if (this.level.enemies[6].energy <= 0) {
-				gameWinnerScreen();
+				gameWinnerScreen(this.muted);
 			} else if (world.character.energy <= 0) {
-				gameOverScreen();
+				gameOverScreen(this.muted);
 			}
 		}, 200);
 		allIntervals.push(this.checkGameEndInterval);

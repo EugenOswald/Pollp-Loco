@@ -45,14 +45,16 @@ function init() {
 /**
  * When the player has won, the winnerscreen comes up and sets gameFinish to True so that no bugs occur.
  */
-function gameWinnerScreen() {
+function gameWinnerScreen(muted) {
 	if (gameFinish == false) {
 		world.character.walking_sound.pause();
 		world.background_sound.pause();
 		keyboard.MUTE = true;
 		allIntervals.forEach(clearInterval);
-		game_winner_sound.play();
-		game_winner_sound.volume = 0.4;
+		if (!muted) {
+			game_winner_sound.play();
+			game_winner_sound.volume = 0.4;
+		}
 		document.getElementById('endFullscreen').classList.add('d-none');
 		document.getElementById('fullscreenButton').classList.add('d-none');
 		document.getElementById('muteButton').classList.add('d-none');
@@ -68,11 +70,14 @@ function gameWinnerScreen() {
 /**
  * When the player has lose, the overrscreen comes up and sets gameFinish to True so that no bugs occur. finishes all intervals
  */
-function gameOverScreen() {
+function gameOverScreen(muted) {
 	if (gameFinish == false) {
 		stopIngameSounds();
 		allIntervals.forEach(clearInterval);
-		game_over_sound.play();
+		if (!muted) {
+			game_over_sound.play();
+			game_over_sound.volume = 0.4;
+		}
 		document.getElementById('endFullscreen').classList.add('d-none');
 		document.getElementById('fullscreenButton').classList.add('d-none');
 		document.getElementById('muteButton').classList.add('d-none');

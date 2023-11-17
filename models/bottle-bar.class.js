@@ -33,15 +33,20 @@ class BottleBar extends DrawableObject {
 		allIntervals.push(this.setBottlebarInterval);
 	}
 
-	
+	/**
+	 * Updates the bottle bar status based on the number of collected bottles.
+	 * This function checks if the collectedBottles array exists in the world object and updates the image accordingly.
+	 */
 	updateBottleBarStatus() {
-		// Sicherstellen, dass world und world.collectedBottles existieren und gültig sind
 		if (world && world.collectedBottles) {
 			super.setBar(world.collectedBottles.length, this.IMAGES_BOTTLEBAR);
 		}
 	}
 
-	// Eine Methode zum Bereinigen des Intervalls, falls nötig
+	/**
+	 * Clears the interval used to update the bottle bar.
+	 * This function stops the interval set by setBottlebar().
+	 */
 	clearBottleBarInterval() {
 		if (this.setBottlebarInterval) {
 			clearInterval(this.setBottlebarInterval);

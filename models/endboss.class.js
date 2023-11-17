@@ -2,7 +2,7 @@ class Endboss extends MovableObject {
 	y = 60;
 	width = 400;
 	height = 400;
-	energy = 100;
+	energy = 150;
 	offset = {
 		top: 70,
 		bottom: 10,
@@ -125,6 +125,6 @@ class Endboss extends MovableObject {
 	 * @returns true or falese
 	 */
 	checkIfEndbossMoved() {
-		return world.endboss.x < 2300 || this.energy < 99;
+		return world.endboss.x < 2300 || this.energy < 149;
 	}
 }
